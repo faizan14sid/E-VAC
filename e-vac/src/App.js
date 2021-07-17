@@ -1,12 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
+import Navbar from "./Components/Navbar";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>E-VAC</h1>
-    </div>
-  );
+  return <div className="App">welcome{/* <Navbar /> */}</div>;
 }
 
 export default App;
