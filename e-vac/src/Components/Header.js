@@ -6,12 +6,14 @@ import logo from "../logo.png";
 import Home from "./Home";
 import "./header.css";
 import About from "./About";
+import Help from "./Help";
+import Profile from "./Profile";
 
 const Header = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Navbar collapseOnSelect expand="lg" bg="mycol" variant="dark">
+    <BrowserRouter>
+      <div>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Container>
             <Link to="/">
               <Navbar.Brand>
@@ -27,8 +29,12 @@ const Header = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link>About us</Nav.Link>
-                <Nav.Link>Help</Nav.Link>
+                <Nav.Link as={Link} to={"/about"}>
+                  About us
+                </Nav.Link>
+                <Nav.Link as={Link} to={"/help"}>
+                  Help
+                </Nav.Link>
               </Nav>
               <Nav>
                 <Button variant="danger">
@@ -50,13 +56,15 @@ const Header = () => {
                 </Button>
               </Nav>
               <Nav>
-                <Nav.Link eventKey={2} href="#profile">
+                <Nav.Link eventKey={2} as={Link} to={"/profile"}>
                   My Profile
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
+      </div>
+      <div>
         <Switch>
           <Route exact path="/">
             <Home />
@@ -64,9 +72,15 @@ const Header = () => {
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/help">
+            <Help />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
         </Switch>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 };
 
