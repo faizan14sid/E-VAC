@@ -56,7 +56,7 @@ const Header = () => {
                 </Button>
               </Nav>
               <Nav>
-                <Nav.Link eventKey={2} as={Link} to={"/profile"}>
+                <Nav.Link as={Link} to={"/profile"}>
                   My Profile
                 </Nav.Link>
               </Nav>

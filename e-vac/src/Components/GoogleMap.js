@@ -8,8 +8,8 @@ export class GoogleMap extends Component {
     selectedPlace: {},
   };
   style = {
-    width: "100%",
-    height: "20rem",
+    width: "auto",
+    height: "80%",
   };
 
   onMarkerClick = (props, marker, e) =>
