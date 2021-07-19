@@ -1,6 +1,7 @@
 
  
 import React from 'react';
+import Logo from './E-VAC logo.png'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -55,9 +56,12 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+      <img src={Logo} alt="Logo" />
+        {/* <Avatar className={classes.avatar}>
+          <img
+          src="public/E-VAC logo.png"
+          alt=""
+        </Avatar> */}
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
