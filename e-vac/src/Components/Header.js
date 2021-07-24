@@ -7,7 +7,7 @@ import Home from "./Home";
 import "./header.css";
 import About from "./About";
 import Help from "./Help";
-import Profile from "./Profile";
+import OtpBox from "./OtpBox";
 import Nearby from "./Hospitals/Nearby";
 import Login from "./Login";
 import Search from "./Hospitals/Search";
@@ -96,6 +96,9 @@ const Header = () => {
           </Route>
           <Route path="/emergency">
             <Emergency />
+          </Route>
+          <Route path="/otp">
+            <OtpBox />
           </Route>
         </Switch>
       </div>
