@@ -8,6 +8,10 @@ import "./header.css";
 import About from "./About";
 import Help from "./Help";
 import Profile from "./Profile";
+import Nearby from "./Hospitals/Nearby";
+import Login from "./Login";
+import Search from "./Hospitals/Search";
+import Emergency from "./Emergency";
 
 const Header = () => {
   return (
@@ -29,23 +33,29 @@ const Header = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
+                <NavDropdown title="Hospitals" id="collasible-nav-dropdown">
+                  <NavDropdown.Item as={Link} to={"/nearby"}>
+                    Near-By Hospitals
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item as={Link} to={"/search"}>
+                    Search Hospitals
+                  </NavDropdown.Item>
+                </NavDropdown>
                 <Nav.Link as={Link} to={"/about"}>
                   About us
-                </Nav.Link>
-                <Nav.Link as={Link} to={"/help"}>
-                  Help
                 </Nav.Link>
               </Nav>
               <Nav>
                 <Button variant="danger">
                   <NavDropdown title="Emergency" id="collasible-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">
+                    <NavDropdown.Item as={Link} to={"/emergency"}>
                       Accident
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">
+                    <NavDropdown.Item as={Link} to={"/emergency"}>
                       Heart Attack
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">
+                    <NavDropdown.Item as={Link} to={"/emergency"}>
                       pregnancy
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
@@ -56,8 +66,8 @@ const Header = () => {
                 </Button>
               </Nav>
               <Nav>
-                <Nav.Link as={Link} to={"/profile"}>
-                  My Profile
+                <Nav.Link as={Link} to={"/login"}>
+                  Login
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
@@ -75,8 +85,17 @@ const Header = () => {
           <Route path="/help">
             <Help />
           </Route>
-          <Route path="/profile">
-            <Profile />
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/search">
+            <Search />
+          </Route>
+          <Route path="/nearby">
+            <Nearby />
+          </Route>
+          <Route path="/emergency">
+            <Emergency />
           </Route>
         </Switch>
       </div>

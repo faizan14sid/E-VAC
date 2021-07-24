@@ -5,7 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -16,10 +16,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
+      <Link to="/">E-VAC</Link> {new Date().getFullYear()}
       {"."}
     </Typography>
   );
@@ -58,9 +55,7 @@ export default function SignIn() {
           src="public/E-VAC logo.png"
           alt=""
         </Avatar> */}
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
+
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -99,11 +94,6 @@ export default function SignIn() {
             <Grid item xs>
               <Link href="#" variant="body2">
                 Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>

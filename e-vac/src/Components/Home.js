@@ -2,6 +2,7 @@ import React from "react";
 import GoogleMap from "./GoogleMap";
 import { Card, Carousel, Button, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -23,7 +24,9 @@ const Home = () => {
                   style={{ display: "flex", justifyContent: "space-around" }}
                 >
                   <Button variant="success">Book Ride</Button>
-                  <Button variant="danger">Emergency</Button>
+                  <Link to="/emergency">
+                    <Button variant="danger">Emergency</Button>
+                  </Link>
                 </div>
               </Card.Body>
             </Card>
@@ -32,21 +35,21 @@ const Home = () => {
         <Col>
           <div style={{ paddingRight: "80px" }}>
             <Carousel variant="dark">
-              <Carousel.Item interval={1500}>
+              <Carousel.Item interval={5000}>
                 <img
                   className="d-block w-100"
                   src="https://www.fleetrobo.com/blog/wp-content/uploads/2020/05/save-maximum-lives-with-intelligent-ambulance-fleet-management-system.jpg"
                   alt="First slide"
                 />
               </Carousel.Item>
-              <Carousel.Item interval={1500}>
+              <Carousel.Item interval={5000}>
                 <img
                   className="d-block w-100"
                   src="https://adda.io/blog/wp-content/uploads/2020/04/Emergency-Contact-1.png"
                   alt="Second slide"
                 />
               </Carousel.Item>
-              <Carousel.Item interval={1500}>
+              <Carousel.Item interval={5000}>
                 <img
                   className="d-block w-100"
                   src="https://thumbs.dreamstime.com/z/all-ambulance-car-via-mobile-phone-emergency-call-ambulance-car-hands-dialing-number-ambulance-service-operator-hospital-building-119941641.jpg"
