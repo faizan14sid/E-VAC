@@ -1,5 +1,7 @@
 import React from "react";
 import GoogleMap from "./GoogleMap";
+import slide1 from "../images/slide-1.jpg";
+import slide2 from "../images/Mobile.png";
 import { Card, Carousel, Button, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
@@ -38,7 +40,7 @@ const Home = () => {
               <Carousel.Item interval={5000}>
                 <img
                   className="d-block w-100"
-                  src="https://www.fleetrobo.com/blog/wp-content/uploads/2020/05/save-maximum-lives-with-intelligent-ambulance-fleet-management-system.jpg"
+                  src={slide1}
                   alt="First slide"
                 />
               </Carousel.Item>
@@ -52,7 +54,7 @@ const Home = () => {
               <Carousel.Item interval={5000}>
                 <img
                   className="d-block w-100"
-                  src="https://thumbs.dreamstime.com/z/all-ambulance-car-via-mobile-phone-emergency-call-ambulance-car-hands-dialing-number-ambulance-service-operator-hospital-building-119941641.jpg"
+                  src={slide2}
                   alt="Third slide"
                 />
               </Carousel.Item>
