@@ -8,34 +8,34 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Row>
-        <Col>
-          <div style={{ paddingLeft: "50px" }}>
-            <Card style={{ width: "60%" }}>
+        
+        <Col sm={3}>
+            <Card >
               <Card.Img
                 variant="top"
                 src="https://www.codemade.io/wp-content/uploads/2019/09/the-best-taxi-booking-app-of-nigeria-carxie-clone-156817865984kng.png"
               />
               <Card.Body>
-                <Card.Title>Book your ride now</Card.Title>
+                <Card.Title>Book your Ambulance now</Card.Title>
                 <Card.Text>
                   In case of emergency click on emergency button
                 </Card.Text>
-                <div
-                  style={{ display: "flex", justifyContent: "space-around" }}
-                >
-                  <Button variant="success">Book Ride</Button>
+               
+                  
                   <Link to="/emergency">
                     <Button variant="danger">Emergency</Button>
                   </Link>
-                </div>
+                
               </Card.Body>
             </Card>
-          </div>
+         
         </Col>
-        <Col>
-          <div style={{ paddingRight: "80px" }}>
+        <Col sm={2}>
+        </Col>
+        <Col sm={6}>
+          
             <Carousel variant="dark">
               <Carousel.Item interval={5000}>
                 <img
@@ -59,12 +59,12 @@ const Home = () => {
                 />
               </Carousel.Item>
             </Carousel>
-          </div>
+         
         </Col>
       </Row>
 
       <GoogleMap />
-    </div>
+    </>
   );
 };
 
