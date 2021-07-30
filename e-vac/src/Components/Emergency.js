@@ -1,10 +1,22 @@
-import React from "react";
-import { Component } from "react";
+import React, {useEffect} from "react";
 
 
-class Emergency extends Component {
+
+const Emergency = () => {
+  useEffect(() => {
+    const fetchAmbulance = async () => {
+        try {
+            setData({ambulance: data.ambulance, isFetching: true});
+            const response = await axios.post("http://localhost/800/ambulance");
+            setData({ambulance: response.data, isFetching: false});
+        } catch (e) {
+            console.log(e);
+            setData({ambulance: data.ambulance, isFetching: false});
+        }
+    };
+    fetchAmbulance();
+}, []);
   
-  render(){
   return (
     <div class="list-group">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active ">
@@ -48,8 +60,7 @@ class Emergency extends Component {
       <small class="text-muted">Donec id elit non mi porta.</small>
     </a>
   </div>
-  );
-  }
-};
+  )
+  };
 
 export default Emergency;
