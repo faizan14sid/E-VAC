@@ -12,7 +12,7 @@
     animation: .5s slideIn ease-in-out forwards, 1s skewBg ease-in-out;
 }
 
-<<<<<<< HEAD
+
 h2 {
     display: grid;
     align-items: center;
@@ -29,8 +29,7 @@ h3 {
     display: flex;
     padding-top: 20px;
 }
-=======
->>>>>>> 3ec566ae363638715b8c9232c7f19edc17bf1ccf
+
 @keyframes skewBg {
     0% {
       transform: scale(.5);

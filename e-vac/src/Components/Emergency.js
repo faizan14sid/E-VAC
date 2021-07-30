@@ -1,10 +1,21 @@
 import React from "react";
-import { Component } from "react";
 
 
-class Emergency extends Component {
+const Emergency=()=> {
+  useEffect(() => {
+    const fetchUsers = async () => {
+        try {
+            setData({users: data.users, isFetching: true});
+            const response = await axios.get(USER_SERVICE_URL);
+            setData({users: response.data, isFetching: false});
+        } catch (e) {
+            console.log(e);
+            setData({users: data.users, isFetching: false});
+        }
+    };
+    fetchUsers();
+}, []);
   
-  render(){
   return (
     <div class="list-group">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active ">
@@ -50,6 +61,6 @@ class Emergency extends Component {
   </div>
   );
   }
-};
+;
 
 export default Emergency;
