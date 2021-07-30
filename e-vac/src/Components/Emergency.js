@@ -1,15 +1,17 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 
 
 const Emergency=()=> {
+  const [ data, setData] = useState([])
   useEffect(() => {
     const fetchAmbulance = async () => {
         try {
+          setData({users: data.users, isFetching: true});
             const response = await axios.post("http://localhost/800/ambulance");
-            setData({ambulance: response.data, isFetching: false});
+            setData({ambulances: response.data, isFetching: false});
         } catch (e) {
             console.log(e);
-            setData({users: data.users, isFetching: false});
+            setData({ambulances: data.ambulances, isFetching: false});
         }
     };
     fetchAmbulance();
