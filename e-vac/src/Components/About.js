@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./About.css";
 import slide1 from "../images/slide-2.png";
