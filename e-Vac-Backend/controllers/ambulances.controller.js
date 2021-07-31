@@ -44,12 +44,13 @@ export const availableambulance = async (req, res) => {
     )
     .exec()
     .then((data) => { 
-      if(true){
-        res.send(data);
+      var l = []
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].distance <=200){
+          l.push(data[i])
+        }
       }
-      else {
-        res.send({ message: "No Ambulance available"});
-      }
+      l.length>0 ? res.send(l) : res.send({message:"No Ambulance available"})
     })
     .catch((er) => {
       console.log("YEEEE");
