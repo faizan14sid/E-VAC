@@ -44,8 +44,12 @@ export const availableambulance = async (req, res) => {
     .exec()
     .then((data) => { 
 
+      // db.test.find({ loc:{ $near:{ $geometry: {type: "Point" , coordinates:[77.6974,12.9591] }, $maxDistance:10000 }}})
+// { "_id" : "madiwala", "type" : "Point", "loc" : [ 77.6174, 12.9226 ] }
       var l = []
       for (var i = 0; i < data.length; i++) {
+        // const dis = data[i].test.find({ loc:{ $near:{ $geometry: {type: "Point" , coordinates:[77.6974,12.9591] }, $maxDistance:10000 }}})
+        // console.log(dis)
         if (data[i].distance <=200){
           l.push(data[i])
         }
