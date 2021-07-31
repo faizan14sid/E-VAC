@@ -20,7 +20,7 @@ export const ambulance = async (req, res) => {
     reviewCount: req.body.reviewCount,
     distance: req.body.distance,
     online: req.body.online,
-    location:req.body.location,
+    location:req.body.location
   });
   ambulance
     .save()
@@ -40,7 +40,7 @@ export const ambulance = async (req, res) => {
 export const availableambulance = async (req, res) => {
   AmbulanceModel.find({online:true,available:true})
     .select(
-      "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance"
+      "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance location"
     )
     .exec()
     .then((data) => { 
