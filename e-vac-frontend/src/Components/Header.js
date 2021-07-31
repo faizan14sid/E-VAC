@@ -49,13 +49,13 @@ const Header = () => {
               <Nav>
                 <Button variant="danger">
                   <NavDropdown title="Emergency" id="collasible-nav-dropdown">
-                    <NavDropdown.Item as={Link} to={"/emergency"}>
+                    <NavDropdown.Item as={Link} to={"/ambulance"}>
                       Accident
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to={"/emergency"}>
+                    <NavDropdown.Item as={Link} to={"/ambulance"}>
                       Heart Attack
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to={"/emergency"}>
+                    <NavDropdown.Item as={Link} to={"/ambulance"}>
                       pregnancy
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
@@ -94,7 +94,7 @@ const Header = () => {
           <Route path="/nearby">
             <Nearby />
           </Route>
-          <Route path="/emergency">
+          <Route path="/ambulance">
             <Emergency />
           </Route>
           <Route path="/otp">
