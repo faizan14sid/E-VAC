@@ -10,6 +10,7 @@ app.use(express.json());
 // app.use(bodyParser.json())
 
 export const ambulance = async (req, res) => {
+  console.log("Working here...");
   const ambulance = new AmbulanceModel({
     ambulanceNumber: req.body.ambulanceNumber,
     hospitalName: req.body.hospitalName,
@@ -19,7 +20,7 @@ export const ambulance = async (req, res) => {
     reviewCount: req.body.reviewCount,
     distance: req.body.distance,
     online: req.body.online,
-    location:req.body.location
+    location:req.body.location,
   });
   ambulance
     .save()
@@ -39,22 +40,16 @@ export const ambulance = async (req, res) => {
 export const availableambulance = async (req, res) => {
   AmbulanceModel.find({online:true,available:true})
     .select(
-      "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance location"
+      "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance"
     )
     .exec()
     .then((data) => { 
-
-      // db.test.find({ loc:{ $near:{ $geometry: {type: "Point" , coordinates:[77.6974,12.9591] }, $maxDistance:10000 }}})
-// { "_id" : "madiwala", "type" : "Point", "loc" : [ 77.6174, 12.9226 ] }
-      var l = []
-      for (var i = 0; i < data.length; i++) {
-        // const dis = data[i].test.find({ loc:{ $near:{ $geometry: {type: "Point" , coordinates:[77.6974,12.9591] }, $maxDistance:10000 }}})
-        // console.log(dis)
-        if (data[i].distance <=200){
-          l.push(data[i])
-        }
+      if(true){
+        res.send(data);
       }
-      l.length>0 ? res.send(l) : res.send({message:"No Ambulance available"})
+      else {
+        res.send({ message: "No Ambulance available"});
+      }
     })
     .catch((er) => {
       console.log("YEEEE");
