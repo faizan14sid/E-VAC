@@ -24,7 +24,7 @@ const Home = () => {
                 </Card.Text>
                
                   
-                  <Link to="/emergency">
+                  <Link to="/ambulance">
                     <Button variant="danger">Emergency</Button>
                   </Link>
                 
