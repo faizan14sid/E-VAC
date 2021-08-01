@@ -10,7 +10,6 @@ app.use(express.json());
 // app.use(bodyParser.json())
 
 export const ambulance = async (req, res) => {
-  console.log("Working here...");
   const ambulance = new AmbulanceModel({
     ambulanceNumber: req.body.ambulanceNumber,
     hospitalName: req.body.hospitalName,
@@ -20,6 +19,7 @@ export const ambulance = async (req, res) => {
     reviewCount: req.body.reviewCount,
     distance: req.body.distance,
     online: req.body.online,
+    location:req.body.location
   });
   ambulance
     .save()
@@ -39,7 +39,7 @@ export const ambulance = async (req, res) => {
 export const availableambulance = async (req, res) => {
   AmbulanceModel.find({online:true,available:true})
     .select(
-      "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance"
+      "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance location"
     )
     .exec()
     .then((data) => { 

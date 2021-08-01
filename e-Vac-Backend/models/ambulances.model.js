@@ -10,7 +10,8 @@ const AmbulanceSchema = new mongoose.Schema({
     reviewCount:{type:Number,required:true},
     distance:{type:Number,required:true},
     online:{type:Boolean,required:true,default:true},
-    available:{type:Boolean,required:true,default:true}
+    available:{type:Boolean,required:true,default:true},
+    location:{type:[Number],index:'2d'}       // [<longitude>, <latitude>]   // create the geospatial index
 },
 );
 
