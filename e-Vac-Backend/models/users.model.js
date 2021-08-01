@@ -12,19 +12,7 @@ const UserSchema = new mongoose.Schema({
         unique: [true, "Number already in use. Please try to login"],
         validate: [(val) => validator.isPhoneNumber(val)]
     },
-    otp: {
-        type: String,
-        required: true,
-        minlength: [4, "Otp should have 4 characters"]
-    },
-    picture:  {
-        type: String
-    },
-    id: {
-        type: String
-    }
-},
-    { timestamps: true }
+}
 );
 
 var UserModel = mongoose.model('UserModel', UserSchema);
