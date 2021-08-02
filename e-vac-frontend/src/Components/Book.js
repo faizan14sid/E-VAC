@@ -8,7 +8,18 @@ function Book() {
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    // useEffect(() => {
+    //   getAmbulanceList();
+    //     }, []);
   
+    //     const getAmbulanceList = () => {
+    //       axios.post("http://localhost:8000/user/ambulance", {ambulance})
+    //       .then((response)=> {
+    //         setAmbulance(response.data)
+    //         console.log(response.data)
+    //       })
+    //       .catch(error=> console.error(`Error: ${error}`));
+    //     }
     return (
       <>
         <Button variant="primary" onClick={handleShow}>
@@ -29,6 +40,7 @@ function Book() {
           <Card style={{ width: '18rem' }}>
   <ListGroup variant="flush">
     <ListGroup.Item>Ambulance Number:</ListGroup.Item>
+    <ListGroup.Item>Hospital Name :</ListGroup.Item>
     <ListGroup.Item>Driver Name :</ListGroup.Item>
     <ListGroup.Item>Driver Phone Number :</ListGroup.Item>
     <ListGroup.Item>Distance :</ListGroup.Item>

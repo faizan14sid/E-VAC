@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Book from "./Book";
 import axios from "axios";
 
 
@@ -32,7 +33,7 @@ const Emergency = () => {
           <small>Distance :{list.distance} km</small>
         </a>
        
-        
+        <Book />
         </div>
         );
          
