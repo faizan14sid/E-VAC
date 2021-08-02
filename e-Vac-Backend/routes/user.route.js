@@ -1,0 +1,44 @@
+import path from 'path';
+import express from 'express';
+import multer from 'multer';
+// import { signin, signup } from '../controllers/user.controller.js';
+import shortid from 'shortid';
+import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import UserModel from '../models/users.model.js';
+import '../node_modules/dotenv/config.js';
+
+// import authenticate from '../middleware/authenticate';
+const router = express.Router();
+const app = express();
+app.use(express.json());
+
+router.post('/login',(req, res)=>{
+    const {name, phoneNumber} = req.body;
+    
+    if(!name || !phoneNumber) {
+        return res.status(422).json({error: "please enter both name and phone no."});
+    }
+    UserModel.findOne({phoneNumber: phoneNumber})
+    .then((oldUser)=>{
+        if(oldUser) {
+            return res.status(422).json({error: "phone number already exist"});
+        }
+
+        const user = new UserModel({
+            name: req.body.name,
+            phoneNumber: req.body.phoneNumber
+        });
+
+        user
+        .save()
+        .then((doc)=>{
+            res.status(201).json({message : "login successfully"})
+
+        }).catch((err)=>res.status(500).json({error: "login failed"}))
+    }).catch(err=> {console.log(err);})
+  });
+  
+
+export default router;
