@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import axios from "axios";
 
 
@@ -9,7 +10,7 @@ const Emergency = () => {
       }, []);
 
       const getAmbulanceList = () => {
-        axios.get("http://localhost:5000/ambulance")
+        axios.get("http://localhost:5000/User/ambulance")
         .then((response)=> {
           setAmbulance(response.data)
           console.log(response.data)
@@ -32,7 +33,7 @@ const Emergency = () => {
           <small>Distance :{list.distance} km</small>
         </a>
        
-        
+     
         </div>
         );
          
