@@ -5,15 +5,15 @@ import mongoose from "mongoose";
 // import userRoute from "./routes/user.route.js";
 // import auth from "./middleware/auth.js";
 const app = express();
-const PORT = 5000;
+const PORT = 8000;
 //Middleware
 app.use(express.json());
 app.use(cors());
+
 import MONGODB_URI from "./config.js";
 import userRoute from "./routes/user.route.js";
 import ambulanceRoute from "./routes/ambulances.route.js";
 // import auth from  './middleware/auth';
-
 // const MONGODB_URI = "mongodb://127.0.0.1/E-Vac";
 
 mongoose.connect(MONGODB_URI, {
@@ -27,6 +27,8 @@ mongoose.connection.on("connected", () => {
 
 // app.use('/api', userRoute);
 app.use("/", ambulanceRoute);
+app.use("/",userRoute);
+
 
 app.listen(PORT, () => {
   console.log(`Server is working on ${PORT}`);
