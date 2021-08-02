@@ -6,31 +6,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    username: {
-        type: String,
+    phoneNumber: {
+        type: Number,
         required: true,
-        unique: [true, "This username is already in use. Please try another username"],
-        lowercase: true
+        unique: [true, "Number already in use. Please try to login"],
+        validate: [(val) => validator.isPhoneNumber(val)]
     },
-    email: {
-        type: String,
-        required: true,
-        unique: [true, "Email already in use. Please try to login"],
-        validate: [(val) => validator.isEmail(val)]
-    },
-    password: {
-        type: String,
-        required: true,
-        minlength: [8, "Password should have atleast 8 characters"]
-    },
-    picture:  {
-        type: String
-    },
-    id: {
-        type: String
-    }
-},
-    { timestamps: true }
+}
 );
 
 var UserModel = mongoose.model('UserModel', UserSchema);
