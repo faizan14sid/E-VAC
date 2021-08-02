@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../logo.png";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -43,6 +43,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const [ name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const handleLogin = async(e) => {
+     e.preventDefault();
+  }
   const classes = useStyles();
 
   return (
@@ -88,6 +93,7 @@ export default function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleLogin}
             >
               Sign In
             </Button>
