@@ -9,7 +9,7 @@ const Emergency = () => {
       }, []);
 
       const getAmbulanceList = () => {
-        axios.get("http://localhost:5000/ambulance")
+        axios.post("http://localhost:8000/user/ambulance", {ambulance})
         .then((response)=> {
           setAmbulance(response.data)
           console.log(response.data)
