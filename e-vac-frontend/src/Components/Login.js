@@ -60,7 +60,7 @@ export default function SignIn() {
      const data = response.json();
      
      if(response.status===422 || !data ){
-       window.alert("Invalid credentials")
+       window.alert("Invalid user or already exist")
      }
      else(
     window.alert("Login successfull")
