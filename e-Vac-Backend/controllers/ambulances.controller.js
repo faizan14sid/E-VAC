@@ -14,6 +14,8 @@ export const newambulance = async (req, res) => {
   const ambulance = new AmbulanceModel({
     ambulanceNumber: req.body.ambulanceNumber,
     hospitalName: req.body.hospitalName,
+    driverName: req.body.driverName,
+    driverPhone:req.body.driverPhone,
     price: req.body.price,
     productImage: req.body.productImage,
     reviewRating: req.body.reviewRating,
@@ -35,6 +37,8 @@ export const newambulance = async (req, res) => {
       });
     });
 };
+
+
 
 // User.find({region: "NA",sector:"Some Sector"}, function(err, user)
 export const availableambulance = async (req, res) => {
@@ -59,7 +63,8 @@ export const availableambulance = async (req, res) => {
     return (Value * Math.PI) / 180;
   }
 
-  const location = req.body.location;
+  const location = [26.931712, 75.78538 ];
+
   AmbulanceModel.find({ online: true, available: true })
     .select(
       "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance location"
@@ -72,7 +77,7 @@ export const availableambulance = async (req, res) => {
         const loc2 = data[i].location;
         const dis = calcCrow(loc1[0], loc1[1], loc2[0], loc2[1]);
         if (dis <= 30) {
-          data[i].distance = dis;
+          data[i].distance = Math.floor(10*dis)/10;
           l.push(data[i]);
         }
       }
