@@ -36,10 +36,11 @@ function Book() {
             <Modal.Title>Book Ambulance</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            
           
-          <Card style={{ width: '18rem' }}>
+          <Card style={{ width: '18rem' }}> 
   <ListGroup variant="flush">
-    <ListGroup.Item>Ambulance Number:</ListGroup.Item>
+    <ListGroup.Item>Ambulance Number :</ListGroup.Item>
     <ListGroup.Item>Hospital Name :</ListGroup.Item>
     <ListGroup.Item>Driver Name :</ListGroup.Item>
     <ListGroup.Item>Driver Phone Number :</ListGroup.Item>
