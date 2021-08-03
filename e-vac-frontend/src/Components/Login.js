@@ -47,7 +47,30 @@ export default function SignIn() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const handleLogin = async(e) => {
      e.preventDefault();
+     const response = await fetch('/login',{
+       method : "POST",
+       headers: {
+         "Content-Type" : "application/json"
+       },
+       body:JSON.stringify({
+         name,
+         phoneNumber
+       })
+     })
+     const data = response.json();
+     
+     if(response.status===422 || !data ){
+       window.alert("Invalid user or already exist")
+     }
+     else(
+    window.alert("Login successfull")
+    
+     )
+    
+
   }
+
+
   const classes = useStyles();
 
   return (
@@ -61,7 +84,7 @@ export default function SignIn() {
           alt=""
         </Avatar> */}
 
-        <form className={classes.form} noValidate>
+        <form method="POST" className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,6 +93,8 @@ export default function SignIn() {
             id="name"
             label="Name"
             name="name"
+            value={name}
+            onChange={(e)=> setName(e.target.value)}
             autoFocus
           />
           <TextField
@@ -81,6 +106,8 @@ export default function SignIn() {
             label="Phone number"
             type="tel"
             id="phone"
+            value={phoneNumber}
+            onChange={(e)=> setPhoneNumber(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
