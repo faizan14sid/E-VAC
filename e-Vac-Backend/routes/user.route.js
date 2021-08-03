@@ -23,6 +23,7 @@ router.post('/login',(req, res)=>{
     UserModel.findOne({phoneNumber: phoneNumber})
     .then((oldUser)=>{
         if(oldUser) {
+        
             return res.status(422).json({error: "phone number already exist"});
         }
 
@@ -34,9 +35,9 @@ router.post('/login',(req, res)=>{
         user
         .save()
         .then((doc)=>{
-            res.status(201).json({message : "login successfully"})
+            res.status(201).json(user)
 
-        }).catch((err)=>res.status(500).json({error: "login failed"}))
+        }).catch((err)=>res.status(500).json({message: err.message}))
     }).catch(err=> {console.log(err);})
   });
   
