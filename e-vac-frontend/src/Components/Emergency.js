@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import Book from './Book'
 import {Link} from 'react-router-dom'
 import { Button } from "react-bootstrap";
 
@@ -58,7 +58,6 @@ useEffect(()=>{
       }
 
 
-
       return( <div>{ambulance.map((list,index)=>{
         return( <div className="list-group">
         <a
@@ -71,9 +70,11 @@ useEffect(()=>{
           </div>
           <p className="d-flex w-100 justify-content-between">
             Ambulance No.  : { list.ambulanceNumber}
-            <Link to="/user/ambulance/book">
-                    <Button variant="success">Book Now</Button>
-                  </Link>
+                 
+           
+                    <Button variant="success"><Book list={list}/></Button>
+                
+                  
           </p>
          
         </a>
