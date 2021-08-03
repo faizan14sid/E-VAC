@@ -4,12 +4,6 @@ import Home from "./Home";
 
 const Emergency = () => {
   const [ambulance, setAmbulance] = useState([]);
-<<<<<<< HEAD
-  const [location,setLocation] = useState([]);
-  useEffect(() => {
-    getAmbulanceList();
-      }, []);
-=======
   const [location, setLocation] = useState({
     loaded: false,
     coordinates: {lat: "", lng: ""}
@@ -51,7 +45,6 @@ useEffect(()=>{
       if(location.loaded && location.coordinates){
       getAmbulanceList();
     } 
->>>>>>> main
 
     },[location])
     
