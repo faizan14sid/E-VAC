@@ -97,7 +97,7 @@ const Home = () => {
                 </Card.Text>
                
                   
-                  <Link to="/ambulance">
+                  <Link to="/user/ambulance">
                     <Button variant="danger">Emergency</Button>
                   </Link>
                 
