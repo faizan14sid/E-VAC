@@ -12,7 +12,6 @@ import Nearby from "./Hospitals/Nearby";
 import Login from "./Login";
 import Search from "./Hospitals/Search";
 import Emergency from "./Emergency";
-
 const Header = () => {
   return (
     <BrowserRouter>
@@ -108,5 +107,4 @@ const Header = () => {
     </BrowserRouter>
   );
 };
-
 export default Header;

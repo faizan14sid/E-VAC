@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Book from "./Book";
 import axios from "axios";
+
 import Home from "./Home";
 
 const Emergency = () => {
   const [ambulance, setAmbulance] = useState([]);
+  useEffect(() => {
+    getAmbulanceList();
+      }, []);
   const [location, setLocation] = useState({
     loaded: false,
     coordinates: {lat: "", lng: ""}
@@ -18,7 +21,7 @@ const onSuccess = (location) => {
             lng: location.coords.longitude,
         },
     });
-   
+
 };
 const onError = error => {
     setLocation({
@@ -39,7 +42,7 @@ useEffect(()=>{
       };
 
       navigator.geolocation.getCurrentPosition(onSuccess, onError)
-      
+
     },[])
 
     useEffect(()=>{
@@ -48,11 +51,12 @@ useEffect(()=>{
     } 
 
     },[location])
-    
- 
-      
+
+
+
       const getAmbulanceList = () => {
-      
+        axios.post("http://localhost:8000/user/ambulance", {ambulance})
+
         axios.post("http://localhost:8000/user/ambulance",{location})
         .then((response)=> {
           setAmbulance(response.data)
@@ -68,6 +72,7 @@ useEffect(()=>{
         >
           <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-1">Hospital Name : {list.hospitalName}</h5>
+            <small>{list.price}</small>
             <small>Rs: {list.price}</small>
           </div>
           <p className="mb-1">
@@ -75,12 +80,11 @@ useEffect(()=>{
           </p>
           <small>Distance :{list.distance} km</small>
         </a>
-       
-        <Book />
+
+
         </div>
         );
-         
-      })}</div>)
 
+      })}</div>)
 };
 export default Emergency;

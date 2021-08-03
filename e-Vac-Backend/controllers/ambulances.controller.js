@@ -8,7 +8,6 @@ import bcrypt from "bcrypt";
 const app = express();
 app.use(express.json());
 // app.use(bodyParser.json())
-
 export const newambulance = async (req, res) => {
   console.log("Working here...");
   const ambulance = new AmbulanceModel({
@@ -35,7 +34,6 @@ export const newambulance = async (req, res) => {
       });
     });
 };
-
 // User.find({region: "NA",sector:"Some Sector"}, function(err, user)
 export const availableambulance = async (req, res) => {
   //This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
@@ -45,7 +43,6 @@ export const availableambulance = async (req, res) => {
     var dLon = toRad(lon2 - lon1);
     var lat1 = toRad(lat1);
     var lat2 = toRad(lat2);
-
     var a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
@@ -53,12 +50,16 @@ export const availableambulance = async (req, res) => {
     var d = R * c;
     return d;
   }
-
   // Converts numeric degrees to radians
   function toRad(Value) {
     return (Value * Math.PI) / 180;
   }
- 
+
+  const location = [
+    26.931712,
+    75.785386
+]	;
+
   const location = req.body.location.coordinates	;
   console.log(location)
   AmbulanceModel.find({ online: true, available: true })
@@ -67,12 +68,14 @@ export const availableambulance = async (req, res) => {
     )
     .exec()
     .then((data) => {
+      const loc1 = [location[0], location[1]];
       const loc1 = [location.lat, location.lng];
       var l = [];
       for (var i = 0; i < data.length; i++) {
         const loc2 = data[i].location;
         const dis = calcCrow(loc1[0], loc1[1], loc2[0], loc2[1]);
         if (dis <= 30) {
+          data[i].distance = dis;
           data[i].distance = Math.floor(10*dis)/10;
           data[i].price = Math.floor(10*data[i].price*dis)/10  ;
           l.push(data[i]);
