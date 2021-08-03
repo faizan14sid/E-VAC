@@ -4,7 +4,7 @@ import validator from 'validator';
 const AmbulanceSchema = new mongoose.Schema({
     ambulanceNumber: {type: String , required: true},
     hospitalName: {type: String,required: true},
-    price: {type: String,required: true},
+    price: {type: Number,required: true},
     productImage:{type:String,required:true},
     reviewRating: {type: Number,required: true},
     reviewCount:{type:Number,required:true},
