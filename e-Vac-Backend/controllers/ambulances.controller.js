@@ -62,22 +62,32 @@ export const availableambulance = async (req, res) => {
   function toRad(Value) {
     return (Value * Math.PI) / 180;
   }
+<<<<<<< HEAD
 
   const location = [26.931712, 75.78538 ];
   
+=======
+ 
+  const location = req.body.location.coordinates	;
+  console.log(location)
+>>>>>>> main
   AmbulanceModel.find({ online: true, available: true })
     .select(
       "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance location"
     )
     .exec()
     .then((data) => {
-      const loc1 = [location[0], location[1]];
+      const loc1 = [location.lat, location.lng];
       var l = [];
       for (var i = 0; i < data.length; i++) {
         const loc2 = data[i].location;
         const dis = calcCrow(loc1[0], loc1[1], loc2[0], loc2[1]);
         if (dis <= 30) {
           data[i].distance = Math.floor(10*dis)/10;
+<<<<<<< HEAD
+=======
+          data[i].price = Math.floor(10*data[i].price*dis)/10  ;
+>>>>>>> main
           l.push(data[i]);
         }
       }

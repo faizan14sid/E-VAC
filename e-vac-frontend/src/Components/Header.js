@@ -156,6 +156,9 @@ const Header = () => {
                 <Nav.Link as={Link} to={"/about"}>
                   About us
                 </Nav.Link>
+                <Nav.Link as={Link} to={"/help"}>
+                  Help
+                </Nav.Link>
               </Nav>
               <Nav>
                 <Button variant="danger">
