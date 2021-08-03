@@ -63,15 +63,8 @@ export const availableambulance = async (req, res) => {
     return (Value * Math.PI) / 180;
   }
 
-<<<<<<< HEAD
   const location = [26.931712, 75.78538 ];
-
-=======
-  const location = [
-    26.931712,
-    75.785386
-]	;
->>>>>>> main
+  
   AmbulanceModel.find({ online: true, available: true })
     .select(
       "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance location"

@@ -4,6 +4,7 @@ import axios from "axios";
 
 const Emergency = () => {
   const [ambulance, setAmbulance] = useState([]);
+  const [location,setLocation] = useState([]);
   useEffect(() => {
     getAmbulanceList();
       }, []);
