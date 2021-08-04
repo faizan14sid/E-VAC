@@ -124,6 +124,7 @@ import Login from "./Login";
 import Search from "./Hospitals/Search";
 import Emergency from "./Emergency";
 import AmbulanceDetails from "./AmbulanceDetails";
+import PaymentForm from "./PaymentForm";
 
 const Header = () => {
   return (
@@ -208,6 +209,9 @@ const Header = () => {
           </Route>
           <Route path="/nearby">
             <Nearby />
+          </Route>
+          <Route path="/user/ambulance/booked/payment">
+            <PaymentForm />
           </Route>
           <Route exact path="/user/ambulance">
             <Emergency />

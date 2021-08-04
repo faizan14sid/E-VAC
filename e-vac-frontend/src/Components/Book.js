@@ -2,6 +2,7 @@ import { Modal, Button, Card, ListGroup } from 'react-bootstrap';
 import React from 'react';
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import AmbulanceDetails from './AmbulanceDetails';
 
 const Book = ({ list }) => {
   const [show, setShow] = useState(false);
@@ -27,7 +28,7 @@ const Book = ({ list }) => {
         <Modal.Body>
 
 
-          <Card style={{ width: '27rem' }}>
+          <Card style={{ width: '24rem' }}>
             <ListGroup variant="flush" style={{ fontFamily: "cursive" }}>
               <ListGroup.Item><span style={{ fontFamily: "sans-serif" }}>Ambulance Number</span> : {list.ambulanceNumber}</ListGroup.Item>
               <ListGroup.Item><span style={{ fontFamily: "sans-serif" }}>Hospital Name </span>: {list.hospitalName} </ListGroup.Item>
