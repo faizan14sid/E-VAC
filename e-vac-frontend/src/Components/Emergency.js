@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Book from "./Book";
 import axios from "axios";
-import Home from "./Home";
+
+import {Link} from 'react-router-dom'
+import { Button } from "react-bootstrap";
 
 const Emergency = () => {
   const [ambulance, setAmbulance] = useState([]);
@@ -27,9 +29,6 @@ const onError = error => {
     });
 };
 
-
-
-
 useEffect(()=>{
     if(!('geolocation' in navigator)) {
         onError({
@@ -49,8 +48,6 @@ useEffect(()=>{
 
     },[location])
     
- 
-      
       const getAmbulanceList = () => {
       
         axios.post("http://localhost:8000/user/ambulance",{location})
@@ -60,23 +57,30 @@ useEffect(()=>{
         })
         .catch(error=> console.error(`Error: ${error}`));
       }
+
+
+
       return( <div>{ambulance.map((list,index)=>{
         return( <div className="list-group">
         <a
-          href="#"
           className="list-group-item list-group-item-action flex-column align-items-start "
         >
           <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-1">Hospital Name : {list.hospitalName}</h5>
-            <small>Rs: {list.price}</small>
+            <small>Distance :{list.distance} km</small>
+            <small>Rs: {list.price}</small>       
           </div>
-          <p className="mb-1">
+          <p className="d-flex w-100 justify-content-between">
             Ambulance No.  : { list.ambulanceNumber}
+            <Link to="/user/ambulance/book">
+                    <Button variant="success">Book Now</Button>
+                  </Link>
           </p>
-          <small>Distance :{list.distance} km</small>
+         
         </a>
        
         <Book />
+        
         </div>
         );
          
