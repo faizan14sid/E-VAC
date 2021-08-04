@@ -9,6 +9,8 @@ const AmbulanceSchema = new mongoose.Schema({
     reviewRating: {type: Number,required: true},
     reviewCount:{type:Number,required:true},
     distance:{type:Number,required:true},
+    driverName:{type: String, require: true},
+    driverNumber: {type: Number, require: true},
     online:{type:Boolean,required:true,default:true},
     available:{type:Boolean,required:true,default:true},
     location:{type:[Number],index:'2d'}       // [<longitude>, <latitude>]   // create the geospatial index
