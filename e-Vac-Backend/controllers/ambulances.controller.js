@@ -17,6 +17,8 @@ export const newambulance = async (req, res) => {
     productImage: req.body.productImage,
     reviewRating: req.body.reviewRating,
     reviewCount: req.body.reviewCount,
+    driverName: req.body.driverName,
+    driverNumber: req.body.driverNumber,
     distance: req.body.distance,
     online: req.body.online,
     location: req.body.location,
@@ -64,7 +66,7 @@ export const availableambulance = async (req, res) => {
   console.log(location)
   AmbulanceModel.find({ online: true, available: true })
     .select(
-      "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance location"
+      "ambulanceNumber hospitalName  price productImage reviewImage reviewRating reviewCount  available online distance location driverName driverNumber"
     )
     .exec()
     .then((data) => {
