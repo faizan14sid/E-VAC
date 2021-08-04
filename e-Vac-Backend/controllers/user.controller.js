@@ -28,6 +28,7 @@ export const SENDOTP = async (req, res) => {
     // });
 }
 
+
 // verify otp to verify entered otp matched with sentotp or not
 export const VERIFYOTP = (req, res) => {
     console.log(req.body.otp, Otp)
