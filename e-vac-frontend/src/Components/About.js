@@ -41,14 +41,14 @@ const About = () => {
                     <li>Patients can now book an ambulance for an emergency as well as for non-emergency services.</li>
                     <li>You can locate the nearest available ambulance.</li>
                     <li>Instantly get the information & contact details of the driver.</li>
-                    <li>User have the option to pay later</li>
+                   
                     
                   </ul>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-xs-12">
                   <ul>
                   <li>Our App provides benefits to ambulance owners like :Receive instant requests for ambulance bookings</li>
-                    <li>Send across information with contact details of the driver</li>
+                  <li>User have the option to pay later</li>
                     
                   </ul>
                 </div>
