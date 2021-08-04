@@ -16,13 +16,13 @@ h2 {
     display: grid;
     align-items: center;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 h3 {
     display: grid;
     align-items: center;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 .list-style {
     display: flex;
