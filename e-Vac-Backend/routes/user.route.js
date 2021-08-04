@@ -16,9 +16,9 @@ app.use(express.json());
 
 
 // send otp
-router.post("/sendotp", SENDOTP);
+router.post("/login/sendotp", SENDOTP);
 // verify otp
-router.post("/verifyotp",VERIFYOTP);
+router.post("/login/verifyotp",VERIFYOTP);
 
 
 router.post('/login',(req, res)=>{

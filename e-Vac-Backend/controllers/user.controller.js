@@ -15,8 +15,9 @@ export const SENDOTP = async(req,res) => {
     const OTP =  await Math.floor(1000 + Math.random() * 9000)   
     Otp = OTP 
     console.log(OTP, req.body)       
-    // const response = await fast2sms.sendMessage({authorization:process.env.API_KEY, message:`${OTP} otp for E-Vac`, numbers:[req.body.phonenumber]})
-    res.send("Good")
+    const response = await fast2sms.sendMessage({authorization:process.env.API_KEY, message:`${OTP} otp for E-Vac`, numbers:[req.body.phoneNumber]})
+    res.send(response)
+    
 
     // sendOtp.send(req.body.phoneNumber, "Parmeshwar", (err, data) => {
     //     console.log(req.body.phoneNumber)
