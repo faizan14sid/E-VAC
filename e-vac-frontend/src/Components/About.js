@@ -38,18 +38,17 @@ const About = () => {
               <div className="list-style">
                 <div className="col-lg-6 col-sm-6 col-xs-12">
                   <ul>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Tempor incididunt</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Incididunt ut labore</li>
+                    <li>Patients can now book an ambulance for an emergency as well as for non-emergency services.</li>
+                    <li>You can locate the nearest available ambulance.</li>
+                    <li>Instantly get the information & contact details of the driver.</li>
+                    
                   </ul>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-xs-12">
                   <ul>
-                    <li>Aliquip ex ea commodo</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Exercitation ullamco</li>
-                    <li>Lorem ipsum dolor</li>
+                  <li>Our App provides benefits to ambulance owners like :Receive instant requests for ambulance bookings</li>
+                    <li>Send across information with contact details of the driver</li>
+                    
                   </ul>
                 </div>
               </div>
