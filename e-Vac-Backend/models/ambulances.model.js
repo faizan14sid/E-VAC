@@ -1,24 +1,23 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
-
 const AmbulanceSchema = new mongoose.Schema({
     ambulanceNumber: {type: String , required: true},
     hospitalName: {type: String,required: true},
+    price: {type: String,required: true},
     price: {type: Number,required: true},
     productImage:{type:String,required:true},
     reviewRating: {type: Number,required: true},
     reviewCount:{type:Number,required:true},
     distance:{type:Number,required:true},
+    driverName:{type: String, require: true},
+    driverNumber: {type: Number, require: true},
     online:{type:Boolean,required:true,default:true},
     available:{type:Boolean,required:true,default:true},
     location:{type:[Number],index:'2d'}       // [<longitude>, <latitude>]   // create the geospatial index
 },
 );
-
 var AmbulanceModel = mongoose.model('AmbulanceModel', AmbulanceSchema);
-
 export default AmbulanceModel;
-
 // const orderSchema = mongoose.Schema({
 //     _id: mongoose.Schema.Types.ObjectId,
 //     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

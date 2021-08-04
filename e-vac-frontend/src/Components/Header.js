@@ -12,7 +12,7 @@ import Nearby from "./Hospitals/Nearby";
 import Login from "./Login";
 import Search from "./Hospitals/Search";
 import Emergency from "./Emergency";
-import Book from "./Book";
+import AmbulanceDetails from "./AmbulanceDetails";
 
 const Header = () => {
   return (
@@ -101,8 +101,8 @@ const Header = () => {
           <Route exact path="/user/ambulance">
             <Emergency />
           </Route>
-          <Route path="/user/ambulnce/book">
-            <Book />
+          <Route path="/user/ambulance/booked">
+            <AmbulanceDetails />
           </Route>
           <Route path="/otp">
             <OtpBox />
@@ -112,5 +112,4 @@ const Header = () => {
     </BrowserRouter>
   );
 };
-
 export default Header;
