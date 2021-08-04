@@ -87,6 +87,5 @@ const Emergency = () => {
 
   })}</div>)
 
-      })}</div>)
 };
 export default Emergency;
