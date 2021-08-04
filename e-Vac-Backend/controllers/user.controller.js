@@ -3,56 +3,78 @@ import jwt from 'jsonwebtoken';
 import '../node_modules/dotenv/config.js';
 import UserModel from '../models/users.model.js';
 import bcrypt from 'bcrypt';
+import fast2sms from 'fast-two-sms';
 
-// const secret = process.env.secret;
+// var  User = require("../models/user");
+// const  SendOtp = require("sendotp");
 
-// export const signin = async(req, res) => {
-//     const {email, password} = req.body;
+// pass your msg91 otp creditials SendOtp
+var Otp = 1234;
+// send otp for sending otp to entered phone number and also pass message sender name like app name from your credintials
+export const SENDOTP = async(req,res) => {
+    const OTP =  await Math.floor(1000 + Math.random() * 9000)   
+    Otp = OTP 
+    console.log(OTP, req.body)       
+    // const response = await fast2sms.sendMessage({authorization:process.env.API_KEY, message:`${OTP} otp for E-Vac`, numbers:[req.body.phonenumber]})
+    res.send("Good")
 
-//     try {
-//         const oldUser = await UserModel.findOne({ email });
-//         if(!oldUser) {
-//             return res.send({message: "User doesn't exists"});
+    // sendOtp.send(req.body.phoneNumber, "Parmeshwar", (err, data) => {
+    //     console.log(req.body.phoneNumber)
+    //     if (err) return  res.json({ err });
+    //     data.type == "success"
+    //     ? res.json({ success:  true })
+    //     : res.json({ success:  false });
+    // });
+}
 
-//         } else {
-//             const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
-//             if(!isPasswordCorrect) {
-//                 return res.send({message: 'Invalid Credentials'});
-            
-//             } else {
-//                 const token = jwt.sign({ email: oldUser.email, id: oldUser._id}, secret, { expiresIn: '24h'});
-//                 res.send({oldUser, token}) 
-//             }
-
-//         }
-//     } catch (error) {
-//         res.send({message: error.message});        
-//     }
-// };
-
-// export const signup = async(req, res) => {
-//     const {name, username, email, password} = req.body;
-//     const picture = req.file.filename;
-    
-//     try {
-//         if(!name || !username || !email || !password) {
-//             res.send({message: "All fields are required"})
-//         } else {
-//         const oldUser = await UserModel.findOne({email});
-
-//         if(oldUser) {
-//             res.send({message: "User already registered"});
-        
-//         } else {
-//             const hashedPassword = await bcrypt.hash(password, 12);
-
-//                 const result = await UserModel.create({email, password: hashedPassword, username, name, picture});
-//                 const token = jwt.sign({ email: result.email, id: result._id }, secret, {expiresIn: "24h"});
-//                 res.send({token, result});
-            
-//         }
-//         }
-//     } catch (error) {
-//         res.send({message: error.message});
-//     }
-// }
+// verify otp to verify entered otp matched with sentotp or not
+export const VERIFYOTP = (req,res) => {
+    console.log(req.body.otp,Otp)
+    if(req.body.otp == Otp ){
+        // if (data.type == "success") {
+            let { phoneNumber } = req.body;
+            UserModel.findOne({ phoneNumber }, (err, user) => {
+                if (err) return  res.json({ err });
+                if (!user) {
+                    // user signup
+                    UserModel.create(req.body, (err, user) => {
+                        if (err) return  res.json({ err });
+                        jwt.sign(
+                            {
+                                userId:  user._id,
+                                phoneNumber:  user.phoneNumber
+                            },
+                            "thisissecret",
+                            (err, signuptoken) => {
+                                if (err) return  res.json({ err });
+                                res.json({
+                                    success:  true,
+                                    signuptoken,
+                                    userId:  user._id,
+                                    message:  "registered successfully"
+                                });
+                            }
+                        );
+                    });
+                }
+                if (user) {
+                    // user signin
+                    jwt.sign(
+                        {
+                            userId:  user._id,
+                            phoneNumber:  user.phoneNumber
+                        },
+                        "thisissecret",
+                        (err, logintoken) => {
+                            if (err) return  res.json({ err });
+                            res.json({ logintoken, userId:  user._id });
+                        }
+                    );
+                }
+            });
+        // }
+        // if (data.type == "error") res.json({ success:  false, message:  data.message });
+    }else{
+        res.send({ message: "Wrong otp"})
+    };
+}

@@ -4,17 +4,13 @@ import validator from 'validator';
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        // required: true,
     },
     phoneNumber: {
         type: Number,
         required: true,
         unique: [true, "Number already in use. Please try to login"],
-<<<<<<< HEAD
-        validate: Number
-=======
         validate: Number,
->>>>>>> main
     },
 }
 );

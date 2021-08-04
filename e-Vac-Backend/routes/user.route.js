@@ -1,7 +1,7 @@
 import path from 'path';
 import express from 'express';
 import multer from 'multer';
-// import { signin, signup } from '../controllers/user.controller.js';
+import {SENDOTP,VERIFYOTP} from '../controllers/user.controller.js';
 import shortid from 'shortid';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
@@ -13,6 +13,13 @@ import '../node_modules/dotenv/config.js';
 const router = express.Router();
 const app = express();
 app.use(express.json());
+
+
+// send otp
+router.post("/sendotp", SENDOTP);
+// verify otp
+router.post("/verifyotp",VERIFYOTP);
+
 
 router.post('/login',(req, res)=>{
     const {name, phoneNumber} = req.body;
