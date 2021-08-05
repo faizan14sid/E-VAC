@@ -47,7 +47,9 @@ export default function SignIn() {
   const history = useHistory();
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+
   const handleLogin = async (e) => {
+
     e.preventDefault();
     const res = await fetch('/login/sendotp', {
       method: "POST",
@@ -62,11 +64,12 @@ export default function SignIn() {
     const data = res.json();
 
     if (res.status === 422 || !data || !name || !phoneNumber) {
-      window.alert("Invalid user or already exist")
+      window.alert("Invalid user")
     }
     else {
       window.alert("please enter otp send on your phone");
-      history.push("/login/sendotp")
+      history.push({ pathname: "/login/sendotp", state: { detail: phoneNumber } })
+
     }
 
   }
@@ -124,9 +127,6 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-
-
-
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
