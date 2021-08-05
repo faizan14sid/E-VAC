@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import logo from "../logo.png";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import OtpBox from './OtpBox'
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -43,11 +44,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const history = useHistory();
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch('/login', {
+    const res = await fetch('/login/sendotp', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -56,20 +58,18 @@ export default function SignIn() {
         name,
         phoneNumber
       })
-    })
-    const data = response.json();
+    });
+    const data = res.json();
 
-    if (response.status === 422 || !data) {
+    if (res.status === 422 || !data || !name || !phoneNumber) {
       window.alert("Invalid user or already exist")
     }
-    else (
-      window.alert("Login successfull")
-
-    )
-
+    else {
+      window.alert("please enter otp send on your phone");
+      history.push("/login/sendotp")
+    }
 
   }
-
 
   const classes = useStyles();
 
@@ -113,18 +113,20 @@ export default function SignIn() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Link style={{ textDecoration: "None" }} to="/otp">
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={handleLogin}
-            >
-              Sign In
-            </Button>
-          </Link>
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleLogin}
+          >
+            Sign In
+          </Button>
+
+
+
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -137,6 +139,6 @@ export default function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
-    </Container>
+    </Container >
   );
 }
