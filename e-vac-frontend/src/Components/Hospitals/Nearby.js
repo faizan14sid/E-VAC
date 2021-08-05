@@ -7,7 +7,7 @@ const Nearby = () => {
   return (
     <div>
       <h1>Nearby hospitals</h1>
-    
+
     </div>
   );
 };

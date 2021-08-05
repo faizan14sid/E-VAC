@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 // import userRoute from "./routes/user.route.js";
 // import auth from "./middleware/auth.js";
 const app = express();
-const PORT = 8000;
+const PORT = 5000;
 //Middleware
 app.use(express.json());
 app.use(cors());

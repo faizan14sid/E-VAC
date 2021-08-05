@@ -13,6 +13,8 @@ export const newambulance = async (req, res) => {
   const ambulance = new AmbulanceModel({
     ambulanceNumber: req.body.ambulanceNumber,
     hospitalName: req.body.hospitalName,
+    driverName: req.body.driverName,
+    driverPhone:req.body.driverPhone,
     price: req.body.price,
     productImage: req.body.productImage,
     reviewRating: req.body.reviewRating,
@@ -36,6 +38,9 @@ export const newambulance = async (req, res) => {
       });
     });
 };
+
+
+
 // User.find({region: "NA",sector:"Some Sector"}, function(err, user)
 export const availableambulance = async (req, res) => {
   //This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
