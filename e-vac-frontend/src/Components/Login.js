@@ -43,30 +43,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-  const [ name, setName] = useState("");
+  const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const handleLogin = async(e) => {
-     e.preventDefault();
-     const response = await fetch('/login',{
-       method : "POST",
-       headers: {
-         "Content-Type" : "application/json"
-       },
-       body:JSON.stringify({
-         name,
-         phoneNumber
-       })
-     })
-     const data = response.json();
-     
-     if(response.status===422 || !data ){
-       window.alert("Invalid user or already exist")
-     }
-     else(
-    window.alert("Login successfull")
-    
-     )
-    
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const response = await fetch('/login', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        phoneNumber
+      })
+    })
+    const data = response.json();
+
+    if (response.status === 422 || !data) {
+      window.alert("Invalid user or already exist")
+    }
+    else (
+      window.alert("Login successfull")
+
+    )
+
 
   }
 
@@ -94,7 +94,7 @@ export default function SignIn() {
             label="Name"
             name="name"
             value={name}
-            onChange={(e)=> setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             autoFocus
           />
           <TextField
@@ -107,7 +107,7 @@ export default function SignIn() {
             type="tel"
             id="phone"
             value={phoneNumber}
-            onChange={(e)=> setPhoneNumber(e.target.value)}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -139,4 +139,4 @@ export default function SignIn() {
       </Box>
     </Container>
   );
- }
+}
