@@ -90,7 +90,7 @@ const Header = () => {
           <Route path="/help">
             <Help />
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
           <Route path="/search">
@@ -108,7 +108,7 @@ const Header = () => {
           <Route path="/user/ambulance/booked">
             <AmbulanceDetails />
           </Route>
-          <Route path="/otp">
+          <Route path="/login/sendotp">
             <OtpBox />
           </Route>
         </Switch>
