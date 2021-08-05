@@ -12,6 +12,10 @@ const UserSchema = new mongoose.Schema({
         unique: [true, "Number already in use. Please try to login"],
         validate: Number,
     },
+    otp:{
+        type: Number,
+        required: true
+    }
 }
 );
 
