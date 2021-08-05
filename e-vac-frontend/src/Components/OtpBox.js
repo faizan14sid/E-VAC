@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import OtpInput from "react-otp-input";
 // import OTPInput, { ResendOTP } from "otp-input-react";
-// import CssBaseline from "@material-ui/core/CssBaseline";
+import { useHistory } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -12,32 +12,61 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-// import "./styles.css";
+import { Component } from "react";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   grid: {
     backgroundColor: "grey",
     height: "50vh",
-    textAlign: "center",
+    textAlign: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 2)
   },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-  },
+    alignItems: "center"
+  }
 }));
 
-export default function App() {
+const OtpBox = (phoneNumber) => {
   const classes = useStyles();
   const theme = useTheme();
+
+  const history = useHistory();
+  const [otp, setOtp] = useState("")
+
+  const handleOtp = async (e) => {
+    e.preventDefault();
+    const res = await fetch('/login/verifyotp', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        phoneNumber,
+        otp
+      })
+    });
+    const myOtp = res.json();
+
+    if (res.status === 422 || !myOtp) {
+      window.alert("Invalid Otp")
+    }
+    else {
+      window.alert("Login successfull");
+      history.push("/")
+    }
+
+  }
+
+
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
@@ -92,8 +121,10 @@ export default function App() {
                   margin: "0 1rem",
                   fontSize: "2rem",
                   borderRadius: 4,
-                  border: "1px solid rgba(0,0,0,0.3)",
+                  border: "1px solid rgba(0,0,0,0.3)"
                 }}
+                value={otp}
+                onChange={(otp) => setOtp(otp)}
               />
             </Grid>
             <Grid item>
@@ -103,6 +134,7 @@ export default function App() {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                onClick={handleOtp}
               >
                 Verify
               </Button>
@@ -113,3 +145,5 @@ export default function App() {
     </Container>
   );
 }
+
+export default OtpBox;

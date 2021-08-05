@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import {SENDOTP,VERIFYOTP} from '../controllers/user.controller.js';
+import { SENDOTP, VERIFYOTP } from '../controllers/user.controller.js';
 import shortid from 'shortid';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
@@ -17,35 +17,35 @@ app.use(express.json());
 // send otp
 router.post("/login/sendotp", SENDOTP);
 // verify otp
-router.post("/login/verifyotp",VERIFYOTP);
+router.post("/login/verifyotp", VERIFYOTP);
 
 
-router.post('/login',(req, res)=>{
-    const {name, phoneNumber} = req.body;
-    
-    if(!name || !phoneNumber) {
-        return res.status(422).json({error: "please enter both name and phone no."});
+router.post('/login', (req, res) => {
+    const { name, phoneNumber } = req.body;
+
+    if (!name || !phoneNumber) {
+        return res.status(422).json({ error: "please enter both name and phone no." });
     }
-    UserModel.findOne({phoneNumber: phoneNumber})
-    .then((oldUser)=>{
-        if(oldUser) {
-        
-            return res.status(422).json({error: "phone number already exist"});
-        }
+    UserModel.findOne({ phoneNumber: phoneNumber })
+        .then((oldUser) => {
+            if (oldUser) {
 
-        const user = new UserModel({
-            name: req.body.name,
-            phoneNumber: req.body.phoneNumber
-        });
+                return res.status(422).json({ error: "phone number already exist" });
+            }
 
-        user
-        .save()
-        .then((doc)=>{
-            res.status(201).json(user)
+            const user = new UserModel({
+                name: req.body.name,
+                phoneNumber: req.body.phoneNumber
+            });
 
-        }).catch((err)=>res.status(500).json({message: err.message}))
-    }).catch(err=> {console.log(err);})
-  });
-  
+            user
+                .save()
+                .then((doc) => {
+                    res.status(201).json(user)
+
+                }).catch((err) => res.status(500).json({ message: err.message }))
+        }).catch(err => { console.log(err); })
+});
+
 
 export default router;
