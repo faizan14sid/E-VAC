@@ -1,64 +1,44 @@
-const express = require('express') 
-const app = express() 
+const cors = require('cors')
+const express = require('express')
+const stripe = require('stripe')("sk_test_51IpLApSFnkLGLRyHnIooiqqzcOtoqroZ6ZC3MqNMeXIU4KqysxYcSo66zQ0BFCPZ27u4EGPcCiYD9zPncKALHHLc00zQE1y4Xk")
+const { v4: uuidv4 } = require('uuid');
+
+
+const app = express();
+
+//middleware
 app.use(express.json());
-
-var Publishable_Key = '###publishablekey###'
-var Secret_Key = '###secretkey#####'
-
-const stripe = require('stripe')(Secret_Key) 
- 
+app.use(cors());
 
 
+//routes
+export const Paymnet = (req,res) => {
+    const {product, token} = req.body;
+    console.log("PRODUCT",product);
+    console.log("PRICE",product.price);
+    const idempontencyKey = uuid()
 
+    return stripe.customers.create({
+        email:token.email,
+        source:token.id
 
-export const Payment =  async(req, res) => {
-    const total = req.query.total;
-
-    console.log('Payment Request Recieved BOOM!!! for this amount >>>', total)
-    
-    const paymentIntent = await stripe.paymentIntents.create({
-        amount: total,     //subunits of the currency
-        currency: "INR",                        
-    });
-
-    // OK -Created
-
-    response.status(201).send({
-        clientSecret: paymentIntent.client_secret,
+    }).then(customer =>{
+        stripe.charges.create({
+            amount : product.price * 100,
+            currency :"INR",
+            customer : customer.id,
+            receipt_email:token.email,
+            description:`purchase of product.name`,
+            shipping:{
+                name:token.card.name,
+                address:{
+                    country:token.card.address_country
+                }
+            }
+        },{idempontencyKey})
     })
+    .then(result => res.status(200).json(result))
+    .catch(err => console.log(err))
+
 
 }
-
-
-
-
-
-
-
-
-
-// export const Payment = (req, res) => { 
-//     // Moreover you can take more details from user 
-//     // like Address, Name, etc from form 
-//     stripe.customers.create({ 
-//         email: req.body.stripeEmail, 
-//         source: req.body.stripeToken, 
-//         name: req.body.name, 
-//         address: req.body.address
-//     }) 
-//     .then((customer) => { 
-
-//         return stripe.charges.create({ 
-//             amount: req.body.amount, 
-//             description: req.body.amount, 
-//             currency: 'INR', 
-//             customer: customer.id 
-//         }); 
-//     }) 
-//     .then((charge) => { 
-//         res.send("Success") // If no error occurs 
-//     }) 
-//     .catch((err) => { 
-//         res.send(err)    // If some error occurs 
-//     }); 
-// } 

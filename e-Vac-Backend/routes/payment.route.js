@@ -7,4 +7,6 @@ const router = express.Router();
 
 
 
-app.post('/payment/create',Payment)
+app.post('/payment',Payment)
+
+
