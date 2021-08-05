@@ -26,8 +26,10 @@ export const SENDOTP = async (req, res) => {
             newuser
                 .save()
                 .then(async (doc) => {
-                    const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${user.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
-                    return res.status(200).send(response)
+                    // const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${user.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
+                    // return res.status(200).send(response)
+                    return res.send({})
+
                 })
                 .catch((err) => {
                     res.status(500).json({ message: err.message })
@@ -38,8 +40,9 @@ export const SENDOTP = async (req, res) => {
             UserModel.updateOne({ phoneNumber }, req.body)
                 .then(async (doc) => {
                     if (!doc) { return res.status(404).end(); }
-                    const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${req.body.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
-                    return res.status(200).send(response)
+                    // const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${req.body.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
+                    // return res.status(200).send(response)
+                    return res.send({})
                 }).catch((err) => {
                     res.send({ message: err.message })
                 })
@@ -63,15 +66,18 @@ export const VERIFYOTP = (req, res) => {
                     },
                     "thisissecret",
                     (err, logintoken) => {
-                        if (err) { return res.json({ message: err.message }) };
+                        if (err) return res.json({ message: err.message });
+                        console.log('1 Yes')
+                        // res.send({   })
                         res.json({ logintoken, userId: user._id });
-                        console.log('get otp')
-                        // return res.status(200).json(logintoken);
+                        console.log('2 Yes')
+                        // return res.status(200).send({})  
                     }
                 );
+            } else {
+                res.send("Invalid otp")
             }
-            return res.send("Invalid otp")
         }
-        return res.status(404).end();
+        // return res.status(404).end();
     });
 }
