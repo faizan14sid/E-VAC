@@ -63,10 +63,10 @@ export const VERIFYOTP = (req, res) => {
                     },
                     "thisissecret",
                     (err, logintoken) => {
-                        if (err) return res.json({ message: err.message });
+                        if (err) { return res.json({ message: err.message }) };
                         res.json({ logintoken, userId: user._id });
-                        console.log('Yes')
-                        // return res.status(200).send({})  
+                        console.log('get otp')
+                        // return res.status(200).json(logintoken);
                     }
                 );
             }
