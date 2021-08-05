@@ -5,61 +5,56 @@ import UserModel from '../models/users.model.js';
 import bcrypt from 'bcrypt';
 import fast2sms from 'fast-two-sms';
 
-// var  User = require("../models/user");
-// const  SendOtp = require("sendotp");
 
-// pass your msg91 otp creditials SendOtp
-var Otp = 1234;
 // send otp for sending otp to entered phone number and also pass message sender name like app name from your credintials
 export const SENDOTP = async (req, res) => {
     const OTP = await Math.floor(1000 + Math.random() * 9000)
-    Otp = OTP
-    console.log(OTP, req.body)
-    const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${OTP} otp for E-Vac`, numbers: [req.body.phoneNumber] })
-    res.send(response)
+    console.log("YEs")
+    req.body.otp = OTP
+    let phoneNumber = req.body.phoneNumber;
+    console.log(phoneNumber)
+    UserModel.findOne({ phoneNumber }, (err, user) => {
+        if (err) return res.send({ message: err.message });
+        if (!user) {
+            // user signup
+            const newuser = new UserModel({
+                name: req.body.name,
+                phoneNumber: req.body.phoneNumber,
+                otp: req.body.otp
+            });
 
+            newuser
+                .save()
+                .then(async (doc) => {
+                    const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${user.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
+                    return res.status(200).send(response)
+                })
+                .catch((err) => {
+                    res.status(500).json({ message: err.message })
+                })
 
-    // sendOtp.send(req.body.phoneNumber, "Parmeshwar", (err, data) => {
-    //     console.log(req.body.phoneNumber)
-    //     if (err) return  res.json({ err });
-    //     data.type == "success"
-    //     ? res.json({ success:  true })
-    //     : res.json({ success:  false });
-    // });
+        }
+        if (user) {
+            UserModel.updateOne({ phoneNumber }, req.body)
+                .then(async (doc) => {
+                    if (!doc) { return res.status(404).end(); }
+                    const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${req.body.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
+                    return res.status(200).send(response)
+                }).catch((err) => {
+                    res.send({ message: err.message })
+                })
+        }
+    })
+
 }
-
 
 // verify otp to verify entered otp matched with sentotp or not
 export const VERIFYOTP = (req, res) => {
-    console.log(req.body.otp, Otp)
-    if (req.body.otp == Otp) {
-        // if (data.type == "success") {
-        let { phoneNumber } = req.body;
-        UserModel.findOne({ phoneNumber }, (err, user) => {
-            if (err) return res.json({ err });
-            if (!user) {
-                // user signup
-                UserModel.create(req.body, (err, user) => {
-                    if (err) return res.json({ err });
-                    jwt.sign(
-                        {
-                            userId: user._id,
-                            phoneNumber: user.phoneNumber
-                        },
-                        "thisissecret",
-                        (err, signuptoken) => {
-                            if (err) return res.json({ err });
-                            res.json({
-                                success: true,
-                                signuptoken,
-                                userId: user._id,
-                                message: "registered successfully"
-                            });
-                        }
-                    );
-                });
-            }
-            if (user) {
+    let phoneNumber = req.body.phoneNumber;
+    UserModel.findOne({ phoneNumber }, (err, user) => {
+        if (err) return res.json({ message: err.message });
+        if (user) {
+            if (user.otp == req.body.otp) {
                 // user signin
                 jwt.sign(
                     {
@@ -68,15 +63,15 @@ export const VERIFYOTP = (req, res) => {
                     },
                     "thisissecret",
                     (err, logintoken) => {
-                        if (err) return res.json({ err });
+                        if (err) return res.json({ message: err.message });
                         res.json({ logintoken, userId: user._id });
+                        console.log('Yes')
+                        // return res.status(200).send({})  
                     }
                 );
             }
-        });
-        // }
-        // if (data.type == "error") res.json({ success:  false, message:  data.message });
-    } else {
-        res.send({ message: "Wrong otp" })
-    };
+            return res.send("Invalid otp")
+        }
+        return res.status(404).end();
+    });
 }

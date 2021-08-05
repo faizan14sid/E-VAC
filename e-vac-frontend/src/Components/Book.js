@@ -2,7 +2,6 @@ import { Modal, Button, Card, ListGroup } from 'react-bootstrap';
 import React from 'react';
 import { useState } from "react";
 import { Link } from 'react-router-dom';
-import AmbulanceDetails from './AmbulanceDetails';
 
 const Book = ({ list }) => {
   const [show, setShow] = useState(false);
