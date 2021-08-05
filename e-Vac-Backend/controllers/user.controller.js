@@ -64,14 +64,17 @@ export const VERIFYOTP = (req,res) => {
                         "thisissecret",
                         (err, logintoken) => {
                             if (err) return  res.json({ message:err.message });
+                            console.log('1 Yes')
+                            // res.send({   })
                             res.json({ logintoken, userId:  user._id });
-                            console.log('Yes')
+                            console.log('2 Yes')
                             // return res.status(200).send({})  
                         }
                     );
+                }else{
+                    res.send("Invalid otp")
                 }
-                return res.send("Invalid otp")
             }
-            return res.status(404).end();
+            // return res.status(404).end();
             });
 }

@@ -26,6 +26,7 @@ mongoose.connection.on("connected", () => {
 });
 
 // app.use('/api', userRoute);
+
 app.use("/", ambulanceRoute);
 app.use("/",userRoute);
 
