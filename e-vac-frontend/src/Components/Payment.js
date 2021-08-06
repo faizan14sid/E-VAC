@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
@@ -45,9 +45,12 @@ const useStyles = makeStyles((theme) => ({
 
 const AmbulanceDetails = () => {
     const classes = useStyles();
+    const location = useLocation()
+    const list = location.state.detail;
+    const dlr = list.price * 0.01349419;
     const [product, setProduct] = useState({
         name: "Ambulance",
-        price: 20,
+        price: dlr,
         productBy: "E-Vac"
     })
 
@@ -81,16 +84,21 @@ const AmbulanceDetails = () => {
                     <div className={classes.section1}>
                         <Grid container alignItems="center">
                             <Grid item xs>
-                                <Typography gutterBottom variant="h5">
-                                    Booking Status   :
+                                Total amount:  <Typography gutterBottom variant="h5">
+                                    Rs{list.price}
+                                </Typography>
+                                Distance:  <Typography gutterBottom variant="h5">
+                                    {list.distance} km
                                 </Typography>
                             </Grid>
+
                             <Grid item>
-                                <Typography gutterBottom variant="h6">
+                                Booking status: <Typography gutterBottom variant="h6">
                                     Confirm <CheckCircleOutlineSharpIcon style={{ color: 'green' }} />
                                 </Typography>
                             </Grid>
                         </Grid>
+
                         <Typography color="textSecondary" variant="body2">
                             You can pay the the amount after the ride is complete.
                         </Typography>
@@ -98,13 +106,12 @@ const AmbulanceDetails = () => {
                     <Divider variant="middle" />
                     <div className={classes.section2}>
                         <Typography gutterBottom variant="body1">
-                            Type of Emergency
+                            <h6>Driver info :</h6>
                         </Typography>
                         <div>
-                            <Chip className={classes.chip} label="Accident" />
-                            <Chip className={classes.chip} style={{ backgroundColor: 'yellowgreen' }} label="Heat Attack" />
-                            <Chip className={classes.chip} label="Pregnancy" />
-                            <Chip className={classes.chip} label="other" />
+                            <Chip className={classes.chip} style={{ backgroundColor: 'lightblue' }} label={list.driverName} />
+                            <Chip className={classes.chip} style={{ backgroundColor: 'yellowgreen' }} label={list.driverNumber} />
+
                         </div>
                     </div>
                     <div className={classes.section3}>

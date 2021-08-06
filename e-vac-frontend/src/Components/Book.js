@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 const Book = ({ list }) => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -41,7 +40,12 @@ const Book = ({ list }) => {
 
         </Modal.Body>
         <Modal.Footer>
-          <Link to="/user/ambulance/booked">
+          <Link to={{
+            pathname: "/payment",
+            state: {
+              detail: list
+            }
+          }} >
             <Button variant="success">
               Confirm Booking
             </Button></Link>
