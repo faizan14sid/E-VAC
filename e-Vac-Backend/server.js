@@ -13,6 +13,7 @@ app.use(cors());
 import MONGODB_URI from "./config.js";
 import userRoute from "./routes/user.route.js";
 import ambulanceRoute from "./routes/ambulances.route.js";
+import paymentRoute from "./routes/payment.route.js";
 // import auth from  './middleware/auth';
 // const MONGODB_URI = "mongodb://127.0.0.1/E-Vac";
 
@@ -25,10 +26,11 @@ mongoose.connection.on("connected", () => {
   console.log("Mongoose is connected");
 });
 
-// app.use('/api', userRoute);
-app.use("/", ambulanceRoute);
-app.use("/",userRoute);
 
+
+app.use("/", ambulanceRoute);
+app.use("/", userRoute);
+app.use("/", paymentRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is working on ${PORT}`);
