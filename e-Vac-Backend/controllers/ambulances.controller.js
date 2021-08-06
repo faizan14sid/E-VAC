@@ -63,11 +63,7 @@ export const availableambulance = async (req, res) => {
   function toRad(Value) {
     return (Value * Math.PI) / 180;
   }
-<<<<<<< HEAD
-  const location = req.body.location.coordinates	;
-=======
   const location = req.body.location.coordinates;
->>>>>>> main
   console.log(location)
   AmbulanceModel.find({ online: true, available: true })
     .select(

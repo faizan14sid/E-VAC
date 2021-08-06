@@ -26,15 +26,6 @@ mongoose.connection.on("connected", () => {
   console.log("Mongoose is connected");
 });
 
-<<<<<<< HEAD
-// app.use('/api', userRoute);
-
-app.use("/", ambulanceRoute);
-app.use("/",userRoute);
-app.use("/",paymentRoute);
-=======
-
->>>>>>> main
 
 app.use("/", ambulanceRoute);
 app.use("/", userRoute);

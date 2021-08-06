@@ -14,14 +14,8 @@ import auth from '../middleware/auth.js';
 // router.get('/ambulance', availableambulance)
 
 
-<<<<<<< HEAD
-router.post('/driver/ambulance',auth,newambulance);
-
-router.post('/user/ambulance',auth,availableambulance);
-=======
 router.post('/driver/ambulance', newambulance);
 
 router.post('/user/ambulance', availableambulance);
->>>>>>> main
 
 export default router;
