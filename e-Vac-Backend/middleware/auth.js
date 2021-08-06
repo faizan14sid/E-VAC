@@ -1,28 +1,19 @@
 import jwt from 'jsonwebtoken';
 import '../node_modules/dotenv/config.js';
 
-const secret = process.env.secret;
 
-const auth = async(req, res, next) => {
+const auth = (req, res, next) => {
+    // console.log(req.headers);
     try {
-        const token = req.headers.authorization.split(" ")[1];
-        const isCustomAuth = token.length < 500;
-
-        let decodedData;
-
-        if (token && isCustomAuth) {
-            decodedData = jwt.verify(token, secret);
-
-            req.userId = decodedData?.id;
-        } else {
-            decodedData = jwt.decode(token);
-
-            req.userId = decodeDate?.sub;
-        }
+        //Extract Authorization token
+        const token = req.headers['auth-token'];
+        const decoded = jwt.verify(token, 'mysecretkey');
         next();
     } catch (error) {
-        res.send({message: err.message});
+        res.status(500).json({
+            message: error.message,
+        });
     }
-};
+}
 
 export default auth;

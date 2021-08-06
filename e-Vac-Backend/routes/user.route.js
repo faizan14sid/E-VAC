@@ -26,32 +26,32 @@ router.post("/login/sendotp", SENDOTP);
 router.post("/login/verifyotp", VERIFYOTP);
 
 
-router.post('/login', (req, res) => {
-    const { name, phoneNumber } = req.body;
+// router.post('/login', (req, res) => {
+//     const { name, phoneNumber } = req.body;
 
-    if (!name || !phoneNumber) {
-        return res.status(422).json({ error: "please enter both name and phone no." });
-    }
-    UserModel.findOne({ phoneNumber: phoneNumber })
-        .then((oldUser) => {
-            if (oldUser) {
+//     if (!name || !phoneNumber) {
+//         return res.status(422).json({ error: "please enter both name and phone no." });
+//     }
+//     UserModel.findOne({ phoneNumber: phoneNumber })
+//         .then((oldUser) => {
+//             if (oldUser) {
 
-                return res.status(422).json({ error: "phone number already exist" });
-            }
+//                 return res.status(422).json({ error: "phone number already exist" });
+//             }
 
-            const user = new UserModel({
-                name: req.body.name,
-                phoneNumber: req.body.phoneNumber
-            });
+//             const user = new UserModel({
+//                 name: req.body.name,
+//                 phoneNumber: req.body.phoneNumber
+//             });
 
-            user
-                .save()
-                .then((doc) => {
-                    res.status(201).json(user)
+//             user
+//                 .save()
+//                 .then((doc) => {
+//                     res.status(201).json(user)
 
-                }).catch((err) => res.status(500).json({ message: err.message }))
-        }).catch(err => { console.log(err); })
-});
+//                 }).catch((err) => res.status(500).json({ message: err.message }))
+//         }).catch(err => { console.log(err); })
+// });
 
 
 export default router;

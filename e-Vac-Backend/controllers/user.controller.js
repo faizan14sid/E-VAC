@@ -2,14 +2,12 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import '../node_modules/dotenv/config.js';
 import UserModel from '../models/users.model.js';
-import bcrypt from 'bcrypt';
 import fast2sms from 'fast-two-sms';
 
 
 // send otp for sending otp to entered phone number and also pass message sender name like app name from your credintials
 export const SENDOTP = async (req, res) => {
     const OTP = await Math.floor(1000 + Math.random() * 9000)
-    console.log("YEs")
     req.body.otp = OTP
     let phoneNumber = req.body.phoneNumber;
     console.log(phoneNumber)
@@ -26,10 +24,8 @@ export const SENDOTP = async (req, res) => {
             newuser
                 .save()
                 .then(async (doc) => {
-                    // const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${user.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
-                    // return res.status(200).send(response)
-                    return res.send({})
-
+                    const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${user.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
+                    return res.status(200).send(response)
                 })
                 .catch((err) => {
                     res.status(500).json({ message: err.message })
@@ -40,9 +36,8 @@ export const SENDOTP = async (req, res) => {
             UserModel.updateOne({ phoneNumber }, req.body)
                 .then(async (doc) => {
                     if (!doc) { return res.status(404).end(); }
-                    // const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${req.body.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
-                    // return res.status(200).send(response)
-                    return res.send({})
+                    const response = await fast2sms.sendMessage({ authorization: process.env.API_KEY, message: `${req.body.otp} otp for E-Vac`, numbers: [req.body.phoneNumber] })
+                    return res.status(200).send(response)
                 }).catch((err) => {
                     res.send({ message: err.message })
                 })
@@ -64,20 +59,16 @@ export const VERIFYOTP = (req, res) => {
                         userId: user._id,
                         phoneNumber: user.phoneNumber
                     },
-                    "thisissecret",
+                    'mysecretkey',
                     (err, logintoken) => {
                         if (err) return res.json({ message: err.message });
-                        console.log('1 Yes')
-                        // res.send({   })
+                        process.env.mysecretkey = logintoken;
                         res.json({ logintoken, userId: user._id });
-                        console.log('2 Yes')
-                        // return res.status(200).send({})  
                     }
                 );
             } else {
-                res.send("Invalid otp")
+                res.send("Invalid Otp")
             }
         }
-        // return res.status(404).end();
-    });
+    })
 }

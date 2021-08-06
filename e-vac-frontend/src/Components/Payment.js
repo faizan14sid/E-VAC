@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import CheckCircleOutlineSharpIcon from '@material-ui/icons/CheckCircleOutlineSharp';
 import GoogleMap from './GoogleMap';
+import StripeCheckout from "react-stripe-checkout"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +45,33 @@ const useStyles = makeStyles((theme) => ({
 
 const AmbulanceDetails = () => {
     const classes = useStyles();
+    const [product, setProduct] = useState({
+        name: "Ambulance",
+        price: 20,
+        productBy: "E-Vac"
+    })
+
+    const makePayment = token => {
+        const body = {
+            token,
+            product
+        }
+        const headers = {
+            "Content-Type": "application/json"
+        }
+
+        return fetch(`http://localhost:5000/payment`, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(body)
+        })
+            .then(response => {
+                console.log("RESPONSE", response);
+                const { status } = response;
+                console.log("STATUS", status);
+            })
+            .catch(error => console.log(error))
+    }
 
 
     return (
@@ -81,9 +109,17 @@ const AmbulanceDetails = () => {
                     </div>
                     <div className={classes.section3}>
                         <Button variant="contained" color="primary">Call driver</Button>
-                        <Link to="/user/ambulance/booked/payment" style={{ textDecoration: 'inherit' }}>
-                            <Button variant="contained" color="secondary"> Pay Now </Button>
-                        </Link>
+
+                        <StripeCheckout
+                            stripeKey="pk_test_51IpLApSFnkLGLRyHy4PXIVanpuwKNOatWnsrSXWxlTdyB2RwZf7H6XIwoGUQT8W1gYUBLzlkWl9P2u9odJwDo2lA005ncsKoGd"
+                            token={makePayment}
+                            name="Payment"
+                            amount={product.price * 100}>
+                            <Button variant="contained" color="secondary">
+                                Pay Now
+                            </Button>
+                        </StripeCheckout>
+
                     </div>
 
 
@@ -93,7 +129,7 @@ const AmbulanceDetails = () => {
             <Paper>
                 <GoogleMap />
             </Paper>
-        </div>
+        </div >
     );
 }
 export default AmbulanceDetails;

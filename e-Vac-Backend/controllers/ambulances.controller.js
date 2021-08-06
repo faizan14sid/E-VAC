@@ -10,12 +10,11 @@ app.use(express.json());
 // app.use(bodyParser.json())
 
 export const newambulance = async (req, res) => {
-  console.log("Working here...");
   const ambulance = new AmbulanceModel({
     ambulanceNumber: req.body.ambulanceNumber,
     hospitalName: req.body.hospitalName,
     driverName: req.body.driverName,
-    driverPhone:req.body.driverPhone,
+    driverPhone: req.body.driverPhone,
     price: req.body.price,
     productImage: req.body.productImage,
     reviewRating: req.body.reviewRating,
@@ -64,8 +63,7 @@ export const availableambulance = async (req, res) => {
   function toRad(Value) {
     return (Value * Math.PI) / 180;
   }
- 
-  const location = req.body.location.coordinates	;
+  const location = req.body.location.coordinates;
   console.log(location)
   AmbulanceModel.find({ online: true, available: true })
     .select(
@@ -79,8 +77,8 @@ export const availableambulance = async (req, res) => {
         const loc2 = data[i].location;
         const dis = calcCrow(loc1[0], loc1[1], loc2[0], loc2[1]);
         if (dis <= 30) {
-          data[i].distance = Math.floor(10*dis)/10;
-          data[i].price = Math.floor(10*data[i].price*dis)/10  ;
+          data[i].distance = Math.floor(10 * dis) / 10;
+          data[i].price = Math.floor(10 * data[i].price * dis) / 10;
           l.push(data[i]);
         }
       }
@@ -89,7 +87,6 @@ export const availableambulance = async (req, res) => {
         : res.send({ message: "No Ambulance available" });
     })
     .catch((er) => {
-      console.log("YEEEE");
       res.status(500).json({
         message: er.message,
       });

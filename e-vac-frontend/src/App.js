@@ -12,8 +12,7 @@ import Nearby from "./Components/Hospitals/Nearby";
 import Login from "./Components/Login";
 import Search from "./Components/Hospitals/Search";
 import Emergency from "./Components/Emergency";
-import AmbulanceDetails from "./Components/AmbulanceDetails";
-import PaymentForm from "./Components/PaymentForm";
+import Payment from "./Components/Payment";
 import Logout from './Components/Logout'
 import { initialState, reducer } from "./reducer/UseReducer";
 
@@ -44,14 +43,14 @@ export const Routing = () => {
       <Route path="/nearby">
         <Nearby />
       </Route>
-      <Route path="/user/ambulance/booked/payment">
-        <PaymentForm />
+      <Route path="/payment">
+        <Payment />
       </Route>
       <Route exact path="/user/ambulance">
         <Emergency />
       </Route>
       <Route path="/user/ambulance/booked">
-        <AmbulanceDetails />
+        <Payment />
       </Route>
       <Route path="/login/sendotp">
         <OtpBox />
