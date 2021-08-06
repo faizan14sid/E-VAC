@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import OtpInput from "react-otp-input";
 // import OTPInput, { ResendOTP } from "otp-input-react";
 import { useLocation, useHistory } from "react-router-dom";
@@ -11,8 +11,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import { Component } from "react";
+// import TextField from "@material-ui/core/TextField";
+// import { Component } from "react";
+import { UserContext } from "../App";
 
 const useStyles = makeStyles(theme => ({
   grid: {
@@ -42,7 +43,8 @@ const OtpBox = ({ props }) => {
   const history = useHistory();
   const [otp, setOtp] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
-  // console.log(location.state.detail)
+  const { state, dispatch } = useContext(UserContext);
+
 
   useEffect(() => {
     setPhoneNumber(location.state.detail); // result: '/secondpage'
@@ -65,6 +67,7 @@ const OtpBox = ({ props }) => {
       window.alert("Invalid otp")
     }
     else {
+      dispatch({ type: "USER", payload: true })
       window.alert("Login successfull");
       history.push("/")
     }
