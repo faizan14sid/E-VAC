@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
+import { Card } from 'react-bootstrap';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
@@ -16,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexWrap: 'wrap',
         '& > *': {
-            margin: theme.spacing(1),
-            width: theme.spacing(90),
+            margin: theme.spacing(2),
+            width: theme.spacing(80),
             height: theme.spacing(73),
         },
     },
@@ -131,14 +132,16 @@ const AmbulanceDetails = () => {
                         </StripeCheckout>
 
                     </div>
-
-
                 </div>
 
             </Paper>
-            <Paper>
+
+            <Card style={{ width: "52rem" }}>
                 <GoogleMap />
-            </Paper>
+            </Card>
+
+
+
         </div >
     );
 }

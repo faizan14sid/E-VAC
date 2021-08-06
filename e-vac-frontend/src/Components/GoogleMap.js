@@ -7,11 +7,11 @@ export class GoogleMap extends Component {
     activeMarker: {},
     selectedPlace: {},
   };
+
   style = {
     width: "auto",
-    height: "80%",
-  };
-
+    height: "auto"
+  }
   onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
