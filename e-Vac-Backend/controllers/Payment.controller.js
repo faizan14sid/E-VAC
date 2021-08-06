@@ -3,8 +3,7 @@ import cors from "cors";
 import Stripe from 'stripe';
 const stripe = new Stripe('sk_test_51IpLApSFnkLGLRyHnIooiqqzcOtoqroZ6ZC3MqNMeXIU4KqysxYcSo66zQ0BFCPZ27u4EGPcCiYD9zPncKALHHLc00zQE1y4Xk');
 
-import pkg from 'uuid';
-const { v4: uuidv4 } = pkg;
+// import { v4, uuidv4 }  from 'uuid';
 
 const app = express();
 
