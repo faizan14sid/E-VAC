@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 const Error = () => {
     const history = useHistory();
     useEffect(() => {
-        window.alert("please Login for book a ambulance")
+        window.alert("please Login for book an ambulance")
         history.push("/")
 
     })

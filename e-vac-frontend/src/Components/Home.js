@@ -8,10 +8,10 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <>
+    <div style={{ backgroundColor: "white" }}>
       <Row>
 
-        <Col sm={3}>
+        <Col sm={3} xs={12}>
           <Card >
             <Card.Img
               variant="top"
@@ -32,9 +32,14 @@ const Home = () => {
           </Card>
 
         </Col>
-        <Col sm={2}>
+        <Col sm={3} xs={10} style={{ margin: "auto" }}><h1 style={{ fontFamily: "serif" }}>Welcome to E-VAC</h1>
+          <br />
+          <br />
+          <br />
+          <br />
+          <h4 style={{ fontFamily: "cursive" }}>Now book an ambulance by just one click</h4>
         </Col>
-        <Col sm={6}>
+        <Col sm={6} xs={12}>
 
           <Carousel variant="dark">
             <Carousel.Item interval={5000}>
@@ -61,10 +66,10 @@ const Home = () => {
           </Carousel>
 
         </Col>
-      </Row>
+      </Row >
 
       <GoogleMap />
-    </>
+    </div>
   );
 };
 
