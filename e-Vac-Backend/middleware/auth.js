@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 const auth =(req,res,next) => {
-
+    // console.log(req.headers);
     try{
         //Extract Authorization token
         const token = req.headers['auth-token'];
@@ -9,7 +9,7 @@ const auth =(req,res,next) => {
         next();
     }catch(error){
         res.status(500).json({
-            error: error
+            message: error.message,
         });
     }
 }

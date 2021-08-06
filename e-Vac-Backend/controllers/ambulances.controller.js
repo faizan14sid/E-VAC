@@ -10,7 +10,6 @@ app.use(express.json());
 // app.use(bodyParser.json())
 
 export const newambulance = async (req, res) => {
-  console.log("Working here...");
   const ambulance = new AmbulanceModel({
     ambulanceNumber: req.body.ambulanceNumber,
     hospitalName: req.body.hospitalName,
@@ -64,7 +63,6 @@ export const availableambulance = async (req, res) => {
   function toRad(Value) {
     return (Value * Math.PI) / 180;
   }
- 
   const location = req.body.location.coordinates	;
   console.log(location)
   AmbulanceModel.find({ online: true, available: true })
@@ -89,7 +87,6 @@ export const availableambulance = async (req, res) => {
         : res.send({ message: "No Ambulance available" });
     })
     .catch((er) => {
-      console.log("YEEEE");
       res.status(500).json({
         message: er.message,
       });

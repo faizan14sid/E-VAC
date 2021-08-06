@@ -59,9 +59,10 @@ export const VERIFYOTP = (req,res) => {
                             userId:  user._id,
                             phoneNumber:  user.phoneNumber
                         },
-                        "mysecretkey",
+                        'mysecretkey',
                         (err, logintoken) => {
                             if (err) return  res.json({ message:err.message });
+                            process.env.mysecretkey = logintoken;
                             res.json({ logintoken, userId:  user._id }); 
                         }
                     );
@@ -69,5 +70,5 @@ export const VERIFYOTP = (req,res) => {
                     res.send("Invalid Otp")
                 }
             }
-    });
+    })
 }
