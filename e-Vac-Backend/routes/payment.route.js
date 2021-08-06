@@ -4,9 +4,9 @@ import { Payment } from '.././controllers/Payment.controller.js';
 const app = express();
 app.use(express.json());
 const router = express.Router();
+import auth from '../middleware/authenticate';
 
 
-
-app.post('/payment',Payment)
+app.post('/payment',auth,Payment)
 
 

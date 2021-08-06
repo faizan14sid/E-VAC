@@ -4,7 +4,7 @@ import { newambulance,availableambulance} from '.././controllers/ambulances.cont
 const app = express();
 app.use(express.json());
 const router = express.Router();
-
+import auth from '../middleware/auth';
 
 
 
@@ -14,8 +14,8 @@ const router = express.Router();
 // router.get('/ambulance', availableambulance)
 
 
-router.post('/driver/ambulance',newambulance);
+router.post('/driver/ambulance',auth,newambulance);
 
-router.post('/user/ambulance',availableambulance);
+router.post('/user/ambulance',auth,availableambulance);
 
 export default router;

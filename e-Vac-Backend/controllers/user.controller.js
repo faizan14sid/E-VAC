@@ -2,14 +2,12 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import '../node_modules/dotenv/config.js';
 import UserModel from '../models/users.model.js';
-import bcrypt from 'bcrypt';
 import fast2sms from 'fast-two-sms';
 
 
 // send otp for sending otp to entered phone number and also pass message sender name like app name from your credintials
 export const SENDOTP = async(req,res) => {
     const OTP =  await Math.floor(1000 + Math.random() * 9000)   
-    console.log("YEs")
     req.body.otp = OTP 
     let  phoneNumber  = req.body.phoneNumber;
     console.log(phoneNumber)
@@ -61,16 +59,15 @@ export const VERIFYOTP = (req,res) => {
                             userId:  user._id,
                             phoneNumber:  user.phoneNumber
                         },
-                        "thisissecret",
+                        "mysecretkey",
                         (err, logintoken) => {
                             if (err) return  res.json({ message:err.message });
                             res.json({ logintoken, userId:  user._id }); 
                         }
                     );
                 }else{
-                    res.send("Invalid otp")
+                    res.send("Invalid Otp")
                 }
             }
-            // return res.status(404).end();
-            });
+    });
 }
