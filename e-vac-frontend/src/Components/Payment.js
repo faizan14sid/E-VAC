@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
 
 const AmbulanceDetails = () => {
     const classes = useStyles();
-    const location = useLocation()
+    const location = useLocation();
+    const history = useHistory();
     const list = location.state.detail;
     const dlr = list.price * 0.01349419;
     const [product, setProduct] = useState({
@@ -71,7 +72,9 @@ const AmbulanceDetails = () => {
             .then(response => {
                 console.log("RESPONSE", response);
                 const { status } = response;
+                window.alert("payment successfull")
                 console.log("STATUS", status);
+                history.push("/")
             })
             .catch(error => console.log(error))
     }
