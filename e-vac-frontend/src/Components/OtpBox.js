@@ -43,14 +43,15 @@ const OtpBox = ({ props }) => {
   const history = useHistory();
   const [otp, setOtp] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
-  const { state, dispatch } = useContext(UserContext);
 
+  const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
     setPhoneNumber(location.state.detail); // result: '/secondpage'
   }, [location])
 
   const handleOtp = async (otp) => {
+
     otp.preventDefault();
     const res = await fetch('/login/verifyotp', {
       method: "POST",
@@ -70,6 +71,7 @@ const OtpBox = ({ props }) => {
       dispatch({ type: "USER", payload: true })
       window.alert("Login successfull");
       history.push("/")
+
     }
 
   }

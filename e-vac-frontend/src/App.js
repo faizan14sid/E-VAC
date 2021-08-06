@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,7 +21,7 @@ import { initialState, reducer } from "./reducer/UseReducer";
 export const UserContext = createContext();
 
 export const Routing = () => {
-  const { state, dispatch } = useReducer(reducer, initialState)
+  const { state, dispatch } = useContext(UserContext);
   if (state) {
     return (
       <Switch>
@@ -99,7 +99,7 @@ export const Routing = () => {
 
 function App() {
 
-  const { state, dispatch } = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
     <div className="App">
