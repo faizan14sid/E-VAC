@@ -11,6 +11,11 @@ const router = express.Router();
 const app = express();
 app.use(express.json());
 
+router.get("/logout", (req, res) => {
+    console.log("my logout page")
+    res.clearCookie('jwtoken', { path: "/" })
+    res.status(200).send("user logout")
+})
 
 // send otp
 router.post("/login/sendotp", SENDOTP);
