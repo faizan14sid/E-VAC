@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import OtpInput from "react-otp-input";
 // import OTPInput, { ResendOTP } from "otp-input-react";
-import { useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -35,29 +35,34 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const OtpBox = (phoneNumber) => {
+const OtpBox = ({ props }) => {
   const classes = useStyles();
   const theme = useTheme();
-
+  const location = useLocation();
   const history = useHistory();
   const [otp, setOtp] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
+  // console.log(location.state.detail)
 
-  const handleOtp = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    setPhoneNumber(location.state.detail); // result: '/secondpage'
+  }, [location])
+
+  const handleOtp = async (otp) => {
+    otp.preventDefault();
     const res = await fetch('/login/verifyotp', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
+      body: ({
         phoneNumber,
         otp
       })
     });
-    const myOtp = res.json();
-
+    const myOtp = res.json;
     if (res.status === 422 || !myOtp) {
-      window.alert("Invalid Otp")
+      window.alert("Invalid otp")
     }
     else {
       window.alert("Login successfull");
