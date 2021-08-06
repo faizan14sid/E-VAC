@@ -4,7 +4,7 @@ import { newambulance,availableambulance} from '.././controllers/ambulances.cont
 const app = express();
 app.use(express.json());
 const router = express.Router();
-import auth from '../middleware/auth';
+import auth from '../middleware/auth.js';
 
 
 

@@ -1,18 +1,19 @@
-const cors = require('cors')
-const express = require('express')
-const stripe = require('stripe')("sk_test_51IpLApSFnkLGLRyHnIooiqqzcOtoqroZ6ZC3MqNMeXIU4KqysxYcSo66zQ0BFCPZ27u4EGPcCiYD9zPncKALHHLc00zQE1y4Xk")
-const { v4: uuidv4 } = require('uuid');
+import express from "express";
+import cors from "cors";
+import Stripe from 'stripe';
+const stripe = new Stripe('sk_test_51IpLApSFnkLGLRyHnIooiqqzcOtoqroZ6ZC3MqNMeXIU4KqysxYcSo66zQ0BFCPZ27u4EGPcCiYD9zPncKALHHLc00zQE1y4Xk');
 
+import pkg from 'uuid';
+const { v4: uuidv4 } = pkg;
 
 const app = express();
 
-//middleware
+
 app.use(express.json());
 app.use(cors());
 
 
-//routes
-export const Paymnet = (req,res) => {
+const Payment = (req,res) => {
     const {product, token} = req.body;
     console.log("PRODUCT",product);
     console.log("PRICE",product.price);
@@ -39,6 +40,6 @@ export const Paymnet = (req,res) => {
     })
     .then(result => res.status(200).json(result))
     .catch(err => console.log(err))
-
-
 }
+
+export default Payment;
