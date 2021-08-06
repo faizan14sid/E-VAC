@@ -14,54 +14,92 @@ import Search from "./Components/Hospitals/Search";
 import Emergency from "./Components/Emergency";
 import Payment from "./Components/Payment";
 import Logout from './Components/Logout'
+import Error from './Components/Error'
 import { initialState, reducer } from "./reducer/UseReducer";
 
 
 export const UserContext = createContext();
 
 export const Routing = () => {
-  return (
-    <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-      <Route path="/help">
-        <Help />
-      </Route>
-      <Route exact path="/login">
-        <Login />
-      </Route>
-      <Route path="/logout">
-        <Logout />
-      </Route>
-      <Route path="/search">
-        <Search />
-      </Route>
-      <Route path="/nearby">
-        <Nearby />
-      </Route>
-      <Route path="/payment">
-        <Payment />
-      </Route>
-      <Route exact path="/user/ambulance">
-        <Emergency />
-      </Route>
-      <Route path="/user/ambulance/booked">
-        <Payment />
-      </Route>
-      <Route path="/login/sendotp">
-        <OtpBox />
-      </Route>
-    </Switch>
-  )
+  const { state, dispatch } = useReducer(reducer, initialState)
+  if (state) {
+    return (
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/help">
+          <Help />
+        </Route>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route path="/logout">
+          <Logout />
+        </Route>
+        <Route path="/search">
+          <Search />
+        </Route>
+        <Route path="/nearby">
+          <Nearby />
+        </Route>
+        <Route path="/payment">
+          <Payment />
+        </Route>
+        <Route exact path="/user/ambulance">
+          <Emergency />
+        </Route>
+        <Route path="/user/ambulance/booked">
+          <Payment />
+        </Route>
+        <Route path="/login/sendotp">
+          <OtpBox />
+        </Route>
+      </Switch>
+    )
+  }
+  else {
+    return (
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/help">
+          <Help />
+        </Route>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route path="/logout">
+          <Logout />
+        </Route>
+        <Route path="/search">
+          <Search />
+        </Route>
+        <Route path="/nearby">
+          <Nearby />
+        </Route>
+        <Route exact path="/user/ambulance">
+          <Error />
+        </Route>
+        <Route path="/login/sendotp">
+          <OtpBox />
+        </Route>
+      </Switch>
+    )
+
+  }
 }
 
 function App() {
 
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const { state, dispatch } = useReducer(reducer, initialState)
 
   return (
     <div className="App">
