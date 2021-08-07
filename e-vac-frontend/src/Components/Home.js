@@ -1,6 +1,7 @@
 import React from "react";
 import GoogleMap from "./GoogleMap";
-import slide1 from "../images/slide-1.jpg";
+import slide1 from "../images/img1.jpg";
+import slide3 from "../images/img2.jpg";
 import slide2 from "../images/Mobile.png";
 import { Card, Carousel, Button, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
@@ -38,7 +39,7 @@ const Home = () => {
           </Paper>
         </Col>
 
-        <Col sm={3} xs={10} style={{ margin: "auto" }}><h1 style={{ fontFamily: "serif", fontWeight: 500 }}>Welcome to E-VAC</h1>
+        <Col sm={3} xs={10} style={{ margin: "auto" }}><h1 style={{ fontFamily: "serif", fontWeight: 500 }}>Hi, Welcome to E-VAC</h1>
           <br />
           <br />
           <br />
@@ -51,21 +52,21 @@ const Home = () => {
             <Carousel.Item interval={5000}>
               <img
                 className="d-block w-100"
-                src={slide1}
+                src={slide3}
                 alt="First slide"
               />
             </Carousel.Item>
             <Carousel.Item interval={5000}>
               <img
                 className="d-block w-100"
-                src="https://adda.io/blog/wp-content/uploads/2020/04/Emergency-Contact-1.png"
+                src={slide2}
                 alt="Second slide"
               />
             </Carousel.Item>
             <Carousel.Item interval={5000}>
               <img
                 className="d-block w-100"
-                src={slide2}
+                src={slide1}
                 alt="Third slide"
               />
             </Carousel.Item>
@@ -73,8 +74,9 @@ const Home = () => {
 
         </Col>
       </Row >
-
-      <GoogleMap />
+      <Row>
+        <GoogleMap />
+      </Row>
     </div>
   );
 };
